@@ -1,0 +1,19 @@
+{
+    "arrAmount": [
+        {
+            "id": 1,
+            "amount": 200,
+            "title": "International Brands"
+        },
+        {
+            "id": 2,
+            "amount": 2000,
+            "title": "High-Quality Products"
+        },
+        {
+            "id": 3,
+            "amount": 30000,
+            "title": "Happy Customers"
+        }
+    ]
+}

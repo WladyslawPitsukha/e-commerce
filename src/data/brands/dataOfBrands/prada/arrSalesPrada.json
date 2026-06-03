@@ -1,0 +1,21 @@
+{
+    "arrSalesPrada": [
+        { "id": 1, "year": 2022, "quarter": 1, "revenue": 8.2, "growth": 7.1 },
+        { "id": 2, "year": 2022, "quarter": 2, "revenue": 8.5, "growth": 7.4 },
+        { "id": 3, "year": 2022, "quarter": 3, "revenue": 8.7, "growth": 7.8 },
+        { "id": 4, "year": 2022, "quarter": 4, "revenue": 8.9, "growth": 8.9 },
+
+        { "id": 5, "year": 2023, "quarter": 1, "revenue": 9.1, "growth": 10.2 },
+        { "id": 6, "year": 2023, "quarter": 2, "revenue": 9.3, "growth": 10.5 },
+        { "id": 7, "year": 2023, "quarter": 3, "revenue": 9.5, "growth": 12.1 },
+        { "id": 8, "year": 2023, "quarter": 4, "revenue": 9.6, "growth": 14.2 },
+
+        { "id": 9, "year": 2024, "quarter": 1, "revenue": 9.8, "growth": 19.4 },
+        { "id": 10, "year": 2024, "quarter": 2, "revenue": 10.0, "growth": 20.1 },
+        { "id": 11, "year": 2024, "quarter": 3, "revenue": 10.2, "growth": 21.5 },
+        { "id": 12, "year": 2024, "quarter": 4, "revenue": 10.3, "growth": 6.2 },
+
+        { "id": 13, "year": 2025, "quarter": 1, "revenue": 10.4, "growth": 5.8 },
+        { "id": 14, "year": 2025, "quarter": 2, "revenue": 10.5, "growth": 4.5 }
+    ]
+}

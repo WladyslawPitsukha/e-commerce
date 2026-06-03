@@ -1,0 +1,13 @@
+{
+    "arrProductVersace": [
+        { "id": 1, "img": "@/assets/img/brands/versace/versace_1.png", "link": "" },
+        { "id": 2, "img": "@/assets/img/brands/versace/versace_2.png", "link": "" },
+        { "id": 3, "img": "@/assets/img/brands/versace/versace_3.png", "link": "" },
+        { "id": 4, "img": "@/assets/img/brands/versace/versace_4.png", "link": "" },
+        { "id": 5, "img": "@/assets/img/brands/versace/versace_5.png", "link": "" },
+        { "id": 6, "img": "@/assets/img/brands/versace/versace_6.png", "link": "" },
+        { "id": 7, "img": "@/assets/img/brands/versace/versace_7.png", "link": "" },
+        { "id": 8, "img": "@/assets/img/brands/versace/versace_8.png", "link": "" },
+        { "id": 9, "img": "@/assets/img/brands/versace/versace_9.png", "link": "" }
+    ]
+}

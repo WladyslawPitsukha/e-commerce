@@ -1,0 +1,32 @@
+{
+    "arrDressStyle": [
+        {
+            "id": 1,
+            "title": "Casual",
+            "link": "/casual",
+            "description": "Casual dress style",
+            "img": "@/assets/img/clotheStyle/clothe1.png"
+        },
+        {
+            "id": 2,
+            "title": "Formal",
+            "link": "/formal",
+            "description": "Formal dress style",
+            "img": "@/assets/img/clotheStyle/clothe2.png"
+        },
+        {
+            "id": 3,
+            "title": "Gym",
+            "link": "/gym",
+            "description": "Gym dress style",
+            "img": "@/assets/img/clotheStyle/clothe3.png"
+        },
+        {
+            "id": 4,
+            "title": "Party",
+            "link": "/party",
+            "description": "Party dress style",
+            "img": "@/assets/img/clotheStyle/clothe4.png"
+        }
+    ]
+}

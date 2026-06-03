@@ -1,0 +1,49 @@
+    {
+    "arrProductPrada": [
+        {
+            "id": 1,
+            "img": "@/assets/img/brands/prada/prada_1.png",
+            "link": ""
+        },
+        {
+            "id": 2,
+            "img": "@/assets/img/brands/prada/prada_2.png",
+            "link": ""
+        },
+        {
+            "id": 3,
+            "img": "@/assets/img/brands/prada/prada_3.png",
+            "link": ""
+        },
+        {
+            "id": 4,
+            "img": "@/assets/img/brands/prada/prada_4.png",
+            "link": ""
+        },
+        {
+            "id": 5,
+            "img": "@/assets/img/brands/prada/prada_5.png",
+            "link": ""
+        },
+        {
+            "id": 6,
+            "img": "@/assets/img/brands/prada/prada_6.png",
+            "link": ""
+        },
+        {
+            "id": 7,
+            "img": "@/assets/img/brands/prada/prada_7.png",
+            "link": ""
+        },
+        {
+            "id": 8,
+            "img": "@/assets/img/brands/prada/prada_8.png",
+            "link": ""
+        },
+        {
+            "id": 9,
+            "img": "@/assets/img/brands/prada/prada_9.png",
+            "link": ""
+        }
+    ]
+}

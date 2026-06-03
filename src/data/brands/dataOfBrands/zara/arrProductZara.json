@@ -1,0 +1,13 @@
+{
+    "arrProductZara": [
+        { "id": 1, "img": "Zara1.png", "link": "" },
+        { "id": 2, "img": "Zara2.png", "link": "" },
+        { "id": 3, "img": "Zara3.png", "link": "" },
+        { "id": 4, "img": "Zara4.png", "link": "" },
+        { "id": 5, "img": "Zara5.png", "link": "" },
+        { "id": 6, "img": "Zara6.png", "link": "" },
+        { "id": 7, "img": "Zara7.png", "link": "" },
+        { "id": 8, "img": "Zara8.png", "link": "" },
+        { "id": 9, "img": "Zara9.png", "link": "" }
+    ]
+}

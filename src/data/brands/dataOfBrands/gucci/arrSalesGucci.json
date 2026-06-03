@@ -1,0 +1,102 @@
+{
+    "arrSalesGucci": [
+        {
+            "id": 1,
+            "year": 2022,
+            "quarter": 1,
+            "revenue": 9.5,
+            "growth": 8.2
+        },
+        {
+            "id": 2,
+            "year": 2022,
+            "quarter": 2,
+            "revenue": 9.8,
+            "growth": 8.5
+        },
+        {
+            "id": 3,
+            "year": 2022,
+            "quarter": 3,
+            "revenue": 10.1,
+            "growth": 8.9
+        },
+        {
+            "id": 4,
+            "year": 2022,
+            "quarter": 4,
+            "revenue": 10.3,
+            "growth": 9.2
+        },
+        {
+            "id": 5,
+            "year": 2023,
+            "quarter": 1,
+            "revenue": 10.5,
+            "growth": 11.5
+        },
+        {
+            "id": 6,
+            "year": 2023,
+            "quarter": 2,
+            "revenue": 10.8,
+            "growth": 11.8
+        },
+        {
+            "id": 7,
+            "year": 2023,
+            "quarter": 3,
+            "revenue": 11.0,
+            "growth": 13.4
+        },
+        {
+            "id": 8,
+            "year": 2023,
+            "quarter": 4,
+            "revenue": 11.2,
+            "growth": 15.6
+        },
+        {
+            "id": 9,
+            "year": 2024,
+            "quarter": 1,
+            "revenue": 11.4,
+            "growth": 21.5
+        },
+        {
+            "id": 10,
+            "year": 2024,
+            "quarter": 2,
+            "revenue": 11.6,
+            "growth": 22.4
+        },
+        {
+            "id": 11,
+            "year": 2024,
+            "quarter": 3,
+            "revenue": 11.8,
+            "growth": 23.8
+        },
+        {
+            "id": 12,
+            "year": 2024,
+            "quarter": 4,
+            "revenue": 12.0,
+            "growth": 7.2
+        },
+        {
+            "id": 13,
+            "year": 2025,
+            "quarter": 1,
+            "revenue": 12.1,
+            "growth": 6.8
+        },
+        {
+            "id": 14,
+            "year": 2025,
+            "quarter": 2,
+            "revenue": 12.2,
+            "growth": 5.2
+        }
+    ]
+}

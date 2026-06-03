@@ -1,0 +1,24 @@
+{
+    "arrIconLinks": [
+        {
+            "icon": "FaXTwitter",
+            "title": "Twitter",
+            "link": "https://twitter.com/"
+        },
+        {
+            "icon": "FaFacebookF",
+            "title": "Facebook",
+            "link": "https://facebook.com/"
+        },
+        {
+            "icon": "FaInstagram",
+            "title": "Instagram",
+            "link": "https://instagram.com/"
+        },
+        {
+            "icon": "FaGithub",
+            "title": "GitHub",
+            "link": "https://github.com/"
+        }
+    ]
+}
