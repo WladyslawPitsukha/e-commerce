@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import React from "react";
 
 
 import { arrTshirtsObjs } from "@/app/(services)/shop/constants/products/arrTshirtsObjs";
@@ -12,7 +11,7 @@ import { ClotheMainObjProps } from "@/types/typeProductCard";
 
 
 
-export default function useRandomCards(sectionType: "new" | "top") {
+export default function useRandomCards() {
     const [randomCards, setRandomCards] = useState<ClotheMainObjProps[]>([]);
     const allCards: ClotheMainObjProps[] = [arrShirtsObjs, arrJeansObjs, arrShortsObj, arrTshirtsObjs].flat(2);
 

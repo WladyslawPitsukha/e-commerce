@@ -6,26 +6,28 @@ if (!connectionUri) {
     throw new Error("MONGODB_URI must be defined in the environment.");
 }
 
-declare global {
-    var mongooseConnection: {
-        connection: typeof mongoose | null;
-        promise: Promise<typeof mongoose> | null;
-    } | undefined;
-}
+type MongooseCache = {
+    connection: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+};
 
-const cached = global.mongooseConnection ?? {
+const globalWithMongoose = globalThis as typeof globalThis & {
+    mongooseConnection?: MongooseCache;
+};
+
+const cached = globalWithMongoose.mongooseConnection ?? {
     connection: null,
     promise: null,
 };
 
-global.mongooseConnection = cached;
+globalWithMongoose.mongooseConnection = cached;
 
 export async function connectToDatabase() {
     if (cached.connection) {
         return cached.connection;
     }
 
-    cached.promise ??= mongoose.connect(connectionUri, {
+    cached.promise ??= mongoose.connect(connectionUri!, {
         bufferCommands: false,
     });
 
