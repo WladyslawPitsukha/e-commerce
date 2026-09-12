@@ -7,9 +7,11 @@ export const arrIconNavlinks: NavLinkProps[] = [
     {
         icon: SlBasket,
         link: "cart",
+        title: "Shopping cart",
     },
     {
         icon: RiAccountCircleLine,
-        link: ""
+        link: "account",
+        title: "Account"
     }
 ];

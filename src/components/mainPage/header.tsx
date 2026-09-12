@@ -36,9 +36,9 @@ export default function Header() {
                     </h5>
                 </button>
                 <article className="flex flex-wrap justify-start gap-5 sm:gap-0 w-full">
-                    {arrAmount.map((arr, index) => (
+                    {arrAmount.map((arr) => (
                         <AmountBlock
-                            key={index}
+                            key={arr.id}
                             id={arr.id}
                             title={arr.title}
                             amount={arr.amount}

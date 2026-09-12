@@ -21,7 +21,7 @@ export function ButtonArrow({
     const Icon = icon;
     return(
         <button 
-            title="button"
+            aria-label={icon === FaArrowLeft ? "Previous customer reviews" : "Next customer reviews"}
             type="button"
             onClick={func}
             className="flex justify-center items-center w-6 h-6"
@@ -58,15 +58,15 @@ export default function SectionComment() {
     ];
 
     return(
-        <section className="flex flex-col w-full h-auto items-start justify-between mt-20 px-[100px] gap-10">
+        <section className="flex flex-col w-full h-auto items-start justify-between mt-20 px-[var(--page-gutter)] gap-10">
             <div className="flex justify-between items-end w-full">
                 <h2 className="font-integral font-bold text-[48px] leading-[100%] tracking-[0%] align-middle text-black uppercase">
                     OUR HAPPY CUSTOMERS
                 </h2>
                 <div className="flex items-center justify-between gap-4">
-                    {arrButton.map((item, index) => (
+                    {arrButton.map((item) => (
                         <ButtonArrow 
-                            key={index}
+                            key={item.icon.toString()}
                             {...item}
                         />
                     ))}
@@ -75,9 +75,9 @@ export default function SectionComment() {
             <div 
                 className="flex gap-5 justify-between w-full transition-transform duration-500 ease-in-out"
             >
-                {arrComSect.slice(curIndex, curIndex + 3).map((item, index) => (
+                {arrComSect.slice(curIndex, curIndex + 3).map((item) => (
                     <CommentBlock
-                        key={index}
+                        key={item.id}
                         {...item}
                     />
                 ))}

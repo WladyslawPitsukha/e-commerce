@@ -49,9 +49,9 @@ export default function MainPage() {
         <div className="flex flex-col items-center bg-white w-full">
             <NavBar />
             <Header />
-            {sections.map((section, index) => (
+            {sections.map((section) => (
                 <SectionCards
-                    key={index}
+                    key={section.id}
                     {...section}
                 />
             ))}

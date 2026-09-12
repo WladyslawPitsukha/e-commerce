@@ -61,7 +61,7 @@ export default function CommentBlock({
     
     return(
         <article 
-            className="flex flex-col items-start h-60 min-w-[400px] w-full rounded-[20px] border border-gray-500 gap-[15px] px-8 py-7"
+            className="flex min-w-0 w-full max-w-[400px] flex-col items-start h-60 rounded-[20px] border border-gray-500 gap-[15px] px-6 py-7"
             key={id}
         >
             <CreationGrade grade={grade} className="yellow-800" />

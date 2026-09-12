@@ -41,8 +41,8 @@ export default function HeaderSect({
                     <h4 className="text-white text-3xl sm:text-5xl uppercase leading-tight">
                         Short story of {name}
                     </h4>
-                    {story.map((item, index) => (
-                        <p className="text-white text-base sm:text-xl max-w-[1200px] indent-6 sm:indent-[50px]" key={index}>
+                    {story.map((item) => (
+                        <p className="text-white text-base sm:text-xl max-w-[1200px] indent-6 sm:indent-[50px]" key={`${name}-${item}`}>
                             {item}
                         </p>
                     ))}

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { usePathname } from "next/navigation";
 // use the native <form> element; `next/form` is not provided by Next.js
 
 import { arrTitleLinks } from "@/constants/navBar/arrTitleLinks";
@@ -12,26 +13,28 @@ import { CreateIcon } from "./creationIcon";
 
 export default function NavBar() {
     const [searchTerm, setSearchTerm] = useState('');
+    const pathname = usePathname();
     
     return(
-        <nav className="flex flex-wrap justify-between gap-4 items-center py-4 px-[var(--page-gutter)] sticky top-0 left-0 bg-white/95 backdrop-blur z-50 w-full border-b border-black/5">
+        <nav aria-label="Primary navigation" className="flex flex-wrap justify-between gap-4 items-center py-4 px-[var(--page-gutter)] sticky top-0 left-0 bg-white/95 backdrop-blur z-50 w-full border-b border-black/5">
             <Link href="/" className="shrink-0">
                 <h2 className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
                 SHOP.COM
                 </h2>
             </Link>
-            <article className="order-3 sm:order-2 flex justify-center items-center gap-4 sm:gap-6 w-full sm:w-auto">
-                {arrTitleLinks.map((item, index) => (
+            <div className="order-3 sm:order-2 flex justify-center items-center gap-4 sm:gap-6 w-full sm:w-auto">
+                {arrTitleLinks.map((item) => (
                     <Link 
                         href={`/${item.link}`}
-                        key={index}
+                        key={item.link}
+                        aria-current={pathname === `/${item.link}` ? "page" : undefined}
                     >
                         <h3 className="font-normal text-base leading-[21.6px] text-black">
                             {item.title}
                         </h3>
                     </Link>
                 ))}                             
-            </article>
+            </div>
             <form
                 action="/search"
                 className="relative flex items-center order-2 sm:order-3 flex-1 min-w-[min(100%,14rem)] sm:max-w-[36rem]"
@@ -53,11 +56,11 @@ export default function NavBar() {
                 />
                 <button type="submit" className="sr-only">Search</button>
             </form>
-            <article className="flex items-center justify-between gap-3 order-1 sm:order-4">
-                {arrIconNavlinks.map((item, index) => (
+            <div className="flex items-center justify-between gap-3 order-1 sm:order-4">
+                {arrIconNavlinks.map((item) => (
                     item.icon ? <Link
                         href={`/${item.link}`}
-                        key={index}
+                        key={item.link || item.title}
                         aria-label={item.title}
                         title={item.title}
                     >
@@ -67,7 +70,7 @@ export default function NavBar() {
                         />
                     </Link> : null
                 ))}
-            </article>
+            </div>
         </nav>
     )
 }

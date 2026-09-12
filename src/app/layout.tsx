@@ -27,7 +27,10 @@ export default function ShopLayout({
   return (
     <html lang="en">
       <body className={`${roboto_mono.className} bg-white m-0`}>
-        <CartProvider>{children}</CartProvider>
+        <a href="#main-content" className="skip-link">Skip to main content</a>
+        <div id="main-content" tabIndex={-1}>
+          <CartProvider>{children}</CartProvider>
+        </div>
       </body>
     </html>
   );

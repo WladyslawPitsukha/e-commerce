@@ -21,7 +21,7 @@ export const ButtonAmount = ({type, func}: {
 
     return(
         <button 
-            title="button"
+            aria-label={type === "increase" ? "Increase quantity" : "Decrease quantity"}
             className="w-6 h-6"
             onClick={func}
         >
@@ -121,7 +121,7 @@ export default function HeaderProduct({
                     <div className="flex flex-col justify-center items-center gap-3 sm:gap-[14px] shrink-0">
                         {images.map((image, index) => (
                             <Image 
-                                key={index}
+                                key={`${String(image)}-${index}`}
                                 src={image}
                                 className="w-16 sm:w-[112px] lg:w-[152px] h-20 sm:h-[125px] lg:h-[168px] rounded-[20px] bg-[#F0EEED] cursor-pointer object-cover"
                                 onClick={handleClick}

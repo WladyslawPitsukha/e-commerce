@@ -19,9 +19,9 @@ export default function SectionCards({
                 {title}
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-3 gap-y-8 sm:gap-[19px] w-full">
-                {array.map((item, index) => (
+                {array.map((item) => (
                     <ClothesCard
-                        key={index}
+                        key={item.id}
                         {...item}
                     />
                 ))}

@@ -26,7 +26,7 @@ export function BlockPartner({
                 </h3>
             </div>
             <hr className="border rounded-full border-black h-full"/>
-            <p className="font-inegral text-xl w-[12rem] text-black">
+            <p className="font-integral text-xl w-[12rem] text-black">
                 {desc}
             </p>
         </article>

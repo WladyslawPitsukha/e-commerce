@@ -28,8 +28,8 @@ export function BlockArtComprasion({
                 }, {
                     link: links.webpageLink,
                     title: "The website",
-                }].map((obj, index) => (
-                    <Link href={obj.link} key={index}>
+                }].map((obj) => (
+                    <Link href={obj.link} key={obj.title}>
                         <h5 className="text-black">
                             {obj.title}
                         </h5>
