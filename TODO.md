@@ -35,16 +35,16 @@
 
 ## P1: Brand Experience
 
-- [ ] Replace the brand list `<img>` elements with `next/image` and add dimensions or `fill` containers.
-- [ ] Replace product detail gallery `<img>` elements with `next/image`.
-- [ ] Add responsive chart sizing tests for phone, tablet, and desktop widths.
-- [ ] Make the Leaflet map initialize once per country dataset and clean up all event listeners.
-- [ ] Add a map loading placeholder and an offline/error state when GeoJSON cannot load.
-- [ ] Avoid using a fixed DOM id of `map` if multiple brand pages can be mounted together.
-- [ ] Add keyboard-accessible country selection and visible focus states.
-- [ ] Fix the comparison table semantics by adding table rows and table cells in valid structure.
-- [ ] Make the comparison table horizontally scrollable without forcing the whole page to overflow.
-- [ ] Add brand not-found and invalid-slug tests.
+- [x] Replace the brand list `<img>` elements with `next/image` and add dimensions or `fill` containers.
+- [x] Replace product detail gallery `<img>` elements with `next/image`.
+- [x] Add responsive chart sizing tests for phone, tablet, and desktop widths.
+- [x] Make the Leaflet map initialize once per country dataset and clean up all event listeners.
+- [x] Add a map loading placeholder and an offline/error state when GeoJSON cannot load.
+- [x] Avoid using a fixed DOM id of `map` if multiple brand pages can be mounted together.
+- [x] Add keyboard-accessible country selection and visible focus states.
+- [x] Fix the comparison table semantics by adding table rows and table cells in valid structure.
+- [x] Make the comparison table horizontally scrollable without forcing the whole page to overflow.
+- [x] Add brand not-found and invalid-slug tests.
 
 ## P1: Responsive UI and Accessibility
 

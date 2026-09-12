@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run lint"
+    "check": "npm run typecheck && npm run lint",
+    "test:brand": "node --test tests/brand-experience.test.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
