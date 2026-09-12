@@ -49,23 +49,23 @@
 ## P1: Responsive UI and Accessibility
 
 - [ ] Test all routes at 320px, 375px, 768px, 1024px, and 1440px widths.
-- [ ] Add Playwright screenshot checks for home, shop, product, brands, and brand-detail routes.
-- [ ] Remove remaining fixed-width UI that causes overflow on narrow devices.
-- [ ] Replace index keys with stable entity keys in all remaining mapped lists.
-- [ ] Add accessible names to icon-only controls and verify tooltips for unfamiliar icons.
-- [ ] Ensure all buttons have visible keyboard focus styles.
+- [ ] Add browser-based screenshot checks for home, shop, product, brands, and brand-detail routes. Playwright was removed from this machine; use another browser test tool when this work resumes.
+- [x] Remove remaining fixed-width UI that causes overflow on narrow devices.
+- [x] Replace index keys with stable entity keys in all remaining mapped lists.
+- [x] Add accessible names to icon-only controls and verify tooltips for unfamiliar icons.
+- [x] Ensure all buttons have visible keyboard focus styles.
 - [ ] Verify heading hierarchy on every route.
-- [ ] Add `aria-current` and active-state styling to navigation links.
-- [ ] Add skip navigation and landmark labels for the main navigation and footer.
+- [x] Add `aria-current` and active-state styling to navigation links.
+- [x] Add skip navigation and landmark labels for the main navigation and footer.
 - [ ] Check color contrast for gray text, gradient brand cards, and chart labels.
-- [ ] Respect reduced-motion preferences for animated titles, hover effects, and page reveals.
-- [ ] Replace placeholder links such as `/company/about`, `/company/features`, and `/company/works` with real pages or disabled states.
-- [ ] Fix typography naming inconsistencies such as `font-inegral` and consolidate font loading.
+- [x] Respect reduced-motion preferences for animated titles, hover effects, and page reveals.
+- [x] Replace placeholder links such as `/company/about`, `/company/features`, and `/company/works` with real pages or disabled states.
+- [x] Fix typography naming inconsistencies such as `font-inegral` and consolidate font loading.
 
 ## P2: Performance and Code Quality
 
-- [ ] Resolve all remaining React hook dependency warnings without suppressing lint rules.
-- [ ] Memoize or redesign the random-card hook so it does not recreate unstable callbacks on every render.
+- [x] Resolve all remaining React hook dependency warnings without suppressing lint rules.
+- [x] Memoize or redesign the random-card hook so it does not recreate unstable callbacks on every render.
 - [ ] Remove the redundant `useEffect` state synchronization in product cards where props can be rendered directly.
 - [ ] Replace dynamic `require()` image loading with static imports or a generated asset manifest.
 - [ ] Remove the lint suppression around dynamic image loading once the asset manifest exists.
