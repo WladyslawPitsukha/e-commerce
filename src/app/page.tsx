@@ -11,7 +11,7 @@ import { arrDressStyle } from "@/constants/arrDressStyle";
 import { ClotheMainObjProps } from "@/types/typeProductCard";
 
 import useRandomCards from "@/utils/randomCards";
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 
 interface SectionArtProps {
     id: number;
@@ -28,8 +28,8 @@ const DRESS_STYLE_CONFIG = {
 } as const;
 
 export default function MainPage() {
-    const newArrivals = useRandomCards('new');
-    const topSelling = useRandomCards('top');
+    const newArrivals = useRandomCards();
+    const topSelling = useRandomCards();
 
     useEffect(() => {
         try {

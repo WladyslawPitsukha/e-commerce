@@ -7,9 +7,7 @@ import SectComprasion from "@/components/brandsPage/sectComprasion";
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: {
-    brands: string;
-  };
+  params: Promise<{ brands: string }>;
 };
 
 export function generateStaticParams() {
@@ -18,8 +16,8 @@ export function generateStaticParams() {
   }))
 }
 
-export default function BrandPage({ params }: Props) {
-  const brandSlug = params.brands;
+export default async function BrandPage({ params }: Props) {
+  const { brands: brandSlug } = await params;
   const brandName = getBrandNameFromSlug(brandSlug);
 
   const brandData =

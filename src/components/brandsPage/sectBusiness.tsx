@@ -21,8 +21,8 @@ export default function SectBusiness({ country, growth, sales }: {
     };
 
     return(
-        <section className="flex flex-col w-full h-auto justify-around items-center bg-white my-10 px-[50px]">
-            <div className="flex justify-evenly items-start gap-5 w-full">
+        <section className="flex flex-col w-full h-auto justify-around items-center bg-white my-10 px-[var(--page-gutter)]">
+            <div className="grid grid-cols-1 xl:grid-cols-2 justify-items-center gap-8 w-full">
                 <PieChartD 
                     arrGrowth={growth}
                 />
@@ -31,16 +31,16 @@ export default function SectBusiness({ country, growth, sales }: {
                 />
             </div>
             <div className='flex flex-col justify-center items-center gap-1 my-10 w-full'>
-                <h2 className='text-3xl font-bold mb-8 text-black'>
+                <h2 className='text-2xl sm:text-3xl font-bold mb-8 text-black'>
                     List of counties 
                 </h2>
-                <div className='flex justify-evenly items-center w-full'>
+                <div className='flex flex-col lg:flex-row justify-evenly items-center gap-8 w-full overflow-hidden'>
                     <article className='flex justify-center items-center p-[10px]'>
                         <ul className='text-black list-with-circles'>
                             {country.map(obj => (
                                 <li 
                                     key={obj.id} 
-                                    className='text-black font text-[20px] cursor-pointer hover:text-gray-600'
+                                    className='text-black font text-base sm:text-[20px] cursor-pointer hover:text-gray-600'
                                     onMouseEnter={() => setHovered(obj.country.countryName)}
                                     onMouseLeave={() => setHovered(null)}
                                     onClick={() => handleCountryClick(obj.country.countryName)}

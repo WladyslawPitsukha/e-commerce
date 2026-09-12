@@ -20,22 +20,22 @@ export const AmountBlock:React.FC<AmountProps> = ({id, amount, title}) => {
 
 export default function Header() {
     return(
-        <header className="flex bg-[#F2F0F1] w-full h-auto">
-            <section className="flex flex-col items-start justify-around gap-8 mx-24 mt-28">
-                <h1 className="text-6xl font-bold leading-[64px] text-left text-black w-[590px]">
+        <header className="flex flex-col lg:flex-row bg-[#F2F0F1] w-full min-h-[32rem] overflow-hidden">
+            <section className="flex flex-col items-start justify-center gap-6 sm:gap-8 px-[var(--page-gutter)] py-12 lg:py-20 lg:w-1/2">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] text-left text-black max-w-[590px]">
                     FIND CLOTHES THAT MATCHES YOUR STYLE
                 </h1>
-                <p className=" text-base font-normal leading-[22px] text-left text-[#00000099] w-[545px]">
+                <p className="text-base font-normal leading-[22px] text-left text-[#00000099] max-w-[545px]">
                     Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.
                 </p>
                 <button 
-                    className="w-52 h-14 py-4 px-16 bg-black rounded-full"
+                    className="w-52 h-14 py-4 px-8 bg-black rounded-full"
                 >
                     <h5 className="text-white text-custom-16 font-medium leading-custom-21.6 text-left">
                         Shop Now
                     </h5>
                 </button>
-                <article className="flex justify-around w-full">
+                <article className="flex flex-wrap justify-start gap-5 sm:gap-0 w-full">
                     {arrAmount.map((arr, index) => (
                         <AmountBlock
                             key={index}
@@ -46,14 +46,14 @@ export default function Header() {
                     ))}
                 </article>
             </section>
-            <section className="relative w-full h-auto">
+            <section className="relative min-h-[20rem] sm:min-h-[28rem] lg:min-h-full w-full lg:w-1/2">
                 <Image 
-                    className="absolute top-0 left-0 w-[90%] h-[100%]"
+                    className="absolute inset-0 w-full h-full object-contain object-bottom"
                     src={Models}
                     alt="Models"
                 />
-                <PiStarFourFill className="absolute w-[104px] h-[104px] top-20 right-20" />
-                <PiStarFourFill className="absolute w-14 h-14 top-[50%]" />
+                <PiStarFourFill className="absolute w-16 h-16 sm:w-[104px] sm:h-[104px] top-8 sm:top-20 right-6 sm:right-20" />
+                <PiStarFourFill className="absolute w-10 h-10 sm:w-14 sm:h-14 top-[50%] left-4" />
             </section>
         </header>
     )

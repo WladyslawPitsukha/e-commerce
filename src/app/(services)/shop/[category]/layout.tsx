@@ -8,12 +8,11 @@
 //TODO: fix component to check of correct working
 
 import type { Metadata } from "next";
-import "./globals.css";
-import {Roboto_Mono} from 'next/font/google';
+import "../globals.css";
+import { Roboto_Mono } from "next/font/google";
 import NavBar from "@/components/mainPage/navbar";
-import Footer from "@/components/mainPage/footer";
 
-export const roboto_mono = Roboto_Mono({
+const roboto_mono = Roboto_Mono({
     subsets:['latin'],
     style:['normal'],
     weight: ['400', '700'],
@@ -36,9 +35,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={roboto_mono.className} style={{
-                backgroundColor: "white"
-            }}>
+            <body className={`${roboto_mono.className} bg-white`}>
                 <NavBar />
                 {children}
             </body>

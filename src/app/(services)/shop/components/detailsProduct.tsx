@@ -29,8 +29,8 @@ export default function DetailsProduct({details, images}:
             <h2 className="font-satoshi font-bold text-2xl leading-100 text-black">
                 Product Details
             </h2>
-            <div className="flex justify-between items-start w-full mt-10">
-                <div className="flex flex-col justify-between items-start w-full gap-14">
+            <div className="flex flex-col lg:flex-row justify-between items-start gap-10 w-full mt-10">
+                <div className="flex flex-col justify-between items-start w-full lg:w-1/2 gap-10 sm:gap-14">
                     <DivBlock 
                         title="Product Dimensions:"
                         className="flex flex-col items-start gap-4"
@@ -55,9 +55,8 @@ export default function DetailsProduct({details, images}:
                         component={
                             <div className="grid grid-cols-4 gap-3 self-start justify-self-start">
                                 {sizes.map((size) => (
-                                    <div className="flex items-center justify-center flex-col gap-2">
+                                    <div key={size.id} className="flex items-center justify-center flex-col gap-2">
                                         <div 
-                                            key={size.id}
                                             className={`flex items-center justify-center px-3 py-3 rounded-[62px] bg-[#F0F0F0] text-black/60`}
                                         >
                                             <p className="font-satoshi font-normal text-base leading-100">
@@ -79,9 +78,8 @@ export default function DetailsProduct({details, images}:
                         component={
                             <div className="flex items-center gap-5">
                                 {colors.map((color) => (
-                                    <div className="flex items-center justify-center flex-col gap-2">
+                                    <div key={color.id} className="flex items-center justify-center flex-col gap-2">
                                         <div 
-                                            key={color.id}
                                             className={`flex justify-center items-center w-[37px] h-[37px] rounded-full cursor-pointer`}
                                             style={{background: color.option}}
                                         >
@@ -98,15 +96,15 @@ export default function DetailsProduct({details, images}:
                         }
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-10 w-full">
-                    {images.map((image) => (
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 w-full lg:w-1/2">
+                    {images.map((image, index) => (
                         <div 
-                            key={image.id}
+                            key={`${String(image)}-${index}`}
                             className="flex items-center justify-center w-[200px] h-[170px] bg-gray-200 rounded-lg overflow-hidden"
                         >
                             <img 
-                                src={image.url} 
-                                alt={`Product image ${image.id}`} 
+                                src={typeof image === "string" ? image : image.src} 
+                                alt={`Product image ${index + 1}`} 
                                 className="w-full h-full object-cover"
                             />
                         </div>

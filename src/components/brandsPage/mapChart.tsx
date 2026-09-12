@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { CountryDataProps } from "@/types/typeCountryData";
@@ -14,7 +14,6 @@ interface MapChartProps {
 export default function MapChart({hoveredCountry, selectedCountry, countryAll}: MapChartProps) {
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.Marker[]>([]);
-    const [highlightedCountry, setHighlightedCountry] = useState<string | null>(null);
     const geoJsonLayerRef = useRef<L.GeoJSON | null>(null);
 
     useEffect(() => {
@@ -50,22 +49,20 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
-        let L: any;
-        
         const initMap = async () => {
             try {
-                L = (await import('leaflet')).default;
+                const leaflet = (await import('leaflet')).default;
                 
-                const map = L.map('map').setView([20, 0], 2);
+                const map = leaflet.map('map').setView([20, 0], 2);
                 mapRef.current = map;
                 
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: ' ',
                     maxZoom: 18,
                     className: 'map-tiles',
                 }).addTo(map);
                 
-                const customIcon = L.icon({
+                const customIcon = leaflet.icon({
                     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
                     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
                     iconSize: [25, 41],
@@ -77,7 +74,7 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
                 countryAll.forEach(obj => {
                     if (obj.country.coordinates) {
                         const [lat, lng] = obj.country.coordinates;
-                        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+                        const marker = leaflet.marker([lat, lng], { icon: customIcon }).addTo(map);
                         
                         const popupContent = `
                             <div style="font-family: Arial, sans-serif; padding: 10px;">
@@ -107,8 +104,8 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
                 fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
                     .then(response => response.json())
                     .then(data => {
-                        const geoJsonLayer = L.geoJSON(data, {
-                            style: (feature: any) => ({
+                        const geoJsonLayer = leaflet.geoJSON(data, {
+                            style: () => ({
                                 fillColor: 'transparent',
                                 weight: 1,
                                 opacity: 1,
@@ -141,9 +138,10 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
     
     const highlightCountry = (countryName: string) => {
         if (geoJsonLayerRef.current) {
-            geoJsonLayerRef.current.eachLayer((layer: any) => {
-                if (layer.feature.properties.name === countryName) {
-                    layer.setStyle({
+            geoJsonLayerRef.current.eachLayer((layer) => {
+                const feature = (layer as L.Layer & { feature?: { properties?: { name?: string } } }).feature;
+                if (feature?.properties?.name === countryName) {
+                    (layer as L.Path).setStyle({
                         fillColor: '#000',
                         fillOpacity: 0.3
                     });
@@ -154,8 +152,8 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
     
     const resetHighlight = () => {
         if (geoJsonLayerRef.current) {
-            geoJsonLayerRef.current.eachLayer((layer: any) => {
-                layer.setStyle({
+            geoJsonLayerRef.current.eachLayer((layer) => {
+                (layer as L.Path).setStyle({
                     fillColor: 'transparent',
                     fillOpacity: 0
                 });
@@ -163,16 +161,8 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
         }
     };
     
-    useEffect(() => {
-        if (highlightedCountry) {
-            highlightCountry(highlightedCountry);
-        } else {
-            resetHighlight();
-        }
-    }, [highlightedCountry]);
-
     return (
-        <article className="w-[800px] h-[470px] bg-white rounded-lg p-4">
+        <article className="w-full max-w-[800px] h-[300px] sm:h-[470px] bg-white rounded-lg p-2 sm:p-4">
             <div id="map" className="w-full h-full rounded-lg"></div>
         </article>
     );

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import {Roboto_Mono} from 'next/font/google';
 
-export const roboto_mono = Roboto_Mono({
+const roboto_mono = Roboto_Mono({
   subsets:['latin'],
   style:['normal'],
   weight: ['400', '700'],
@@ -15,11 +15,9 @@ export type Props = {
 export async function generateMetadata({
   params
 }: { 
-  params: {
-    brands: string
-  }
+  params: Promise<{ brands: string }>
 }): Promise<Metadata> {
-  const brandSlug = params.brands;
+  const { brands: brandSlug } = await params;
   const brandName = brandSlug.charAt(0).toUpperCase() + brandSlug.slice(1).toLowerCase();
 
   return {

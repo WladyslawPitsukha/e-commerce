@@ -1,11 +1,12 @@
 import { ClotheMainObjProps } from "@/types/typeProductCard";
 
 
-export function importImages(category: string, id: number):any[] {
-    const images: any[] = [];
+export function importImages(category: string, id: number): ClotheMainObjProps["img"][] {
+    const images: ClotheMainObjProps["img"][] = [];
 
     for(let i = 1; i <= id; i++) {
-        const image = require(`@/assets/img/${category}/${category}${id}.png`);
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const image = require(`@/assets/img/${category}/${category}${id}.png`) as ClotheMainObjProps["img"];
         images.push(image);
     }
 

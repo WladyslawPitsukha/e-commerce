@@ -58,7 +58,7 @@ export default function Home() {
             const shuffled = [...allProducts];
             for (let i = shuffled.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                [shuffled[i], shuffled[j]] = [shuffled[j]!, shuffled[i]!];
             }
             setShuffledProducts(shuffled);
             setPage(1);
@@ -85,7 +85,7 @@ export default function Home() {
     if (error) return <div className="p-10 text-center text-red-600">{error}</div>;
 
     return(
-        <div className="flex flex-col justify-center bg-white px-[100px]">
+        <div className="flex flex-col justify-center bg-white page-gutter">
             <NavBar />
             <main className="flex flex-col justify-between items-start bg-white gap-6">
                 <div className="flex">
@@ -96,8 +96,8 @@ export default function Home() {
                         {'  '} Shop
                     </h5>
                 </div>
-                <div className="flex items-start justify-center gap-5 w-full h-auto">
-                    <aside className="flex flex-col  items-start h-auto min-w-[295px] px-6 py-5 gap-6 border rounded-[20px] border-black/10">
+                <div className="flex flex-col lg:flex-row items-start justify-center gap-6 w-full h-auto">
+                    <aside className="flex flex-col items-start h-auto w-full lg:w-[295px] lg:shrink-0 px-4 sm:px-6 py-5 gap-6 border rounded-[20px] border-black/10">
                         <div className="flex justify-between items-center w-full">
                             <h2 className="font-satoshi font-bold text-xl leading-100 tracking-0 align-middle text-black">
                                 Filters
@@ -136,12 +136,12 @@ export default function Home() {
                             }
                         />
                     </aside>
-                    <section className="flex flex-col items-start w-full h-auto gap-4">
-                        <div className='flex items-center justify-between w-full'>
-                            <h2 className='font-satoshi font-bold text-[32px] leading-100 tracking-0 align-middle text-black'>
+                    <section className="flex flex-col items-start w-full min-w-0 h-auto gap-4">
+                        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full'>
+                            <h2 className='font-satoshi font-bold text-2xl sm:text-[32px] leading-tight tracking-0 align-middle text-black'>
                                 Products
                             </h2>
-                            <div className='flex items-center justify-center gap-3'>
+                            <div className='flex flex-wrap items-center gap-3 text-sm'>
                                 <h5 className='font-satoshi font-normal text-base leading-100 tracking-0 text-black/60'>
                                     Showing {startIndex + 1}-{endIndex} of {total} products
                                 </h5>
@@ -158,15 +158,15 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className='grid grid-cols-3 gap-[36px]'>
+                        <div className='grid grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 w-full'>
                             {visibleProducts.map((product) => (
                                 <ClothesCard key={product.id} {...product} />
                             ))}
                         </div>
 
                         {/* Pagination controls */}
-                        <div className="flex items-center justify-between w-full mt-6">
-                            <div className="flex items-center gap-2">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full mt-6">
+                            <div className="flex flex-wrap justify-center items-center gap-2">
                                 <button
                                     onClick={goPrev}
                                     disabled={page === 1}

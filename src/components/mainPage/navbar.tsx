@@ -20,11 +20,13 @@ export default function NavBar() {
     }
 
     return(
-        <nav className="flex justify-around items-center my-6 sticky top-0 left-0 bg-white z-50 w-full">
-            <h2 className="text-[32px] font-bold leading-[38.4px] text-left text-black">
+        <nav className="flex flex-wrap justify-between gap-4 items-center py-4 px-[var(--page-gutter)] sticky top-0 left-0 bg-white/95 backdrop-blur z-50 w-full border-b border-black/5">
+            <Link href="/" className="shrink-0">
+                <h2 className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
                 SHOP.COM
-            </h2>
-            <article className="flex justify-between items-center gap-6">
+                </h2>
+            </Link>
+            <article className="order-3 sm:order-2 flex justify-center items-center gap-4 sm:gap-6 w-full sm:w-auto">
                 {arrTitleLinks.map((item, index) => (
                     <Link 
                         href={`/${item.link}`}
@@ -38,7 +40,7 @@ export default function NavBar() {
             </article>
             <form
                 action="/search"
-                className="relative flex items-center"
+                className="relative flex items-center order-2 sm:order-3 flex-1 min-w-[min(100%,14rem)] sm:max-w-[36rem]"
                 onSubmit={handleSubmit}
                 role="search"
                 aria-label="Site search"
@@ -51,16 +53,16 @@ export default function NavBar() {
                     type="text"
                     name="q"
                     value={searchTerm}
-                    className="py-2 pl-10 pr-4 w-[577px] h-12 border rounded-full outline-none bg-[#F0F0F0]"
+                    className="py-2 pl-10 pr-4 w-full h-11 border rounded-full outline-none bg-[#F0F0F0]"
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search for products..."
                     aria-label="Search for products"
                 />
                 <button type="submit" className="sr-only">Search</button>
             </form>
-            <article className="flex items-center justify-between gap-4">
+            <article className="flex items-center justify-between gap-3 order-1 sm:order-4">
                 {arrIconNavlinks.map((item, index) => (
-                    <Link
+                    item.icon ? <Link
                         href={`/${item.link}`}
                         key={index}
                         aria-label={item.title}
@@ -70,7 +72,7 @@ export default function NavBar() {
                             icon={item.icon}
                             className="w-6 h-6 text-black cursor-pointer transition-transform duration-200 hover:scale-110"
                         />
-                    </Link>
+                    </Link> : null
                 ))}
             </article>
         </nav>

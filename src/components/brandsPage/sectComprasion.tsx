@@ -70,8 +70,12 @@ export default function SectComprasion() {
 
     const arrBlockBrands = arrBrands.map(obj => obj.brand).filter(brand => brand !== undefined)
 
+    if (!arrBlockBrands[0]) {
+        return null;
+    }
+
     return(
-        <section className="flex items-start justify-evenly w-full h-auto my-10 px-[50px] gap-4 bg-white">
+        <section className="flex flex-col lg:flex-row items-start justify-evenly w-full h-auto my-10 px-[var(--page-gutter)] gap-6 bg-white overflow-x-auto">
             <BlockArtComprasion  
                 id={arrBlockBrands[0].id}
                 name={arrBlockBrands[0].name}
@@ -80,8 +84,8 @@ export default function SectComprasion() {
             <TableContainer>
                 <Table aria-label="simple table">
                     <TableHead>
-                        {tableHeadProps.map((title) => (
-                            <TableCell>
+                        {tableHeadProps.map((title, index) => (
+                            <TableCell key={`${title}-${index}`}>
                                 <h5 className="w-24">
                                     {title}
                                 </h5>
@@ -89,8 +93,8 @@ export default function SectComprasion() {
                         ))}
                     </TableHead>
                     <TableBody>
-                        {tableBodyProps.map((title) => (
-                            <TableCell>
+                        {tableBodyProps.map((title, index) => (
+                            <TableCell key={`${title}-${index}`}>
                                 <h5 className="w-24">
                                     {title}
                                 </h5>

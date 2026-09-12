@@ -2,18 +2,17 @@
 
 import { CreationGrade } from "@/components/mainPage/creationGrade";
 import { CreationPrice } from "@/components/mainPage/creationPrice";
-import { HeaderCardProps, ProductCardProps } from "@/types/typeProductCard";
+import { HeaderCardProps } from "@/types/typeProductCard";
 
 import { IoCheckmark } from "react-icons/io5";
 
 import Image from "next/image";
 import { ReactNode, useState } from "react";
-import { IconType } from "react-icons";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
 export const ButtonAmount = ({type, func}: {
     type: 'increase' | 'decrease'
-    func: any;
+    func: () => void;
 }) => {
     const icon = type === 'decrease' ? FaMinus : FaPlus;
     const Icon = icon
@@ -60,18 +59,18 @@ export default function HeaderProduct({
     details,
 
 }: HeaderCardProps) {
-    const [imageChoice, setImageChoice] = useState(images[0]);
+    const [imageChoice, setImageChoice] = useState(images[0] ?? "");
     const [amountProduct, setAmountProduct] = useState<number>(0);
 
     const { mainPrice, option, procent } = price;
     const { sizes, colors } = details;
 
     const handleClick = () => {
-        if(Array.isArray(images)) {
+        if(images.length > 0) {
             const currentIndex = images.indexOf(imageChoice);
             const nextIndex = (currentIndex + 1) % images.length;
             
-            setImageChoice(images[nextIndex])
+            setImageChoice(images[nextIndex] ?? imageChoice)
         }
     }
 
@@ -90,18 +89,18 @@ export default function HeaderProduct({
     const textItemsBlock = "flex flex-col items-start justify-center";
 
     return (
-        <header key={id} className="flex flex-col justify-center items-center gap-9 h-auto w-auto px-[100px]">
+        <header key={id} className="flex flex-col justify-center items-center gap-9 h-auto w-full px-[var(--page-gutter)] py-8 sm:py-12">
             <div className="">
 
             </div>
-            <div className="flex justify-between items-center gap-10">
-                <article className="flex justify-center items-center gap-[14px]">
-                    <div className="flex flex-col justify-center items-center gap-[14px]">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-8 lg:gap-10 w-full max-w-7xl">
+                <article className="flex justify-center items-center gap-3 sm:gap-[14px] w-full lg:w-1/2">
+                    <div className="flex flex-col justify-center items-center gap-3 sm:gap-[14px] shrink-0">
                         {images.map((image, index) => (
                             <Image 
                                 key={index}
                                 src={image}
-                                className="w-[152px] h-[168px] rounded-[20px] bg-[#F0EEED] cursor-pointer"
+                                className="w-16 sm:w-[112px] lg:w-[152px] h-20 sm:h-[125px] lg:h-[168px] rounded-[20px] bg-[#F0EEED] cursor-pointer object-cover"
                                 onClick={handleClick}
                                 alt={`Product's image by id: ${index}`}
                             />
@@ -109,15 +108,15 @@ export default function HeaderProduct({
                     </div>
                     <div>
                         <Image 
-                            className="w-[444px] h-[530px] rounded-[20px] bg-[#F0EEED]"
+                            className="w-full max-w-[444px] h-auto aspect-[4/5] rounded-[20px] bg-[#F0EEED] object-cover"
                             src={imageChoice}
                             alt="Product's image"
                         />
                     </div>
                 </article>
-                <article className={`${textItemsBlock} gap-6 justify-between h-full`}>
+                <article className={`${textItemsBlock} gap-6 justify-between h-full w-full lg:w-1/2`}>
                     <div className={`${textItemsBlock} gap-5`}>
-                        <h1 className={`font-integral uppercase font-bold text-40 leading-100 tracking-0 align-middle text-black`}>
+                        <h1 className={`font-integral uppercase font-bold text-3xl sm:text-40 leading-tight tracking-0 align-middle text-black`}>
                             {title}
                         </h1>
                         <div className="flex flex-col items-start gap-[14px]">
@@ -154,7 +153,7 @@ export default function HeaderProduct({
                         className="flex flex-col items-start gap-4"
                         classNameTitle="font-satoshi font-normal text-base leading-100 tracking-0 text-black/60"
                         component= {
-                            <div className="flex justify-between items-center gap-3">
+                            <div className="flex flex-wrap justify-start items-center gap-3">
                                 {sizes.map((size) => (
                                     <div 
                                         className={`w-auto h-auto py-3 px-6 bg-[#f0f0f0] rounded-[62px] cursor-pointer`}
@@ -168,7 +167,7 @@ export default function HeaderProduct({
                             </div>
                         }
                     />
-                    <div className="flex items-center gap-5">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 w-full">
                         <div className="flex justify-between items-center w-auto bg-light-gray h-auto gap-[40px] rounded-[62px] px-5 py-4 ">
                             <ButtonAmount 
                                 type="decrease"
@@ -182,7 +181,7 @@ export default function HeaderProduct({
                                 func={incrAmount}
                             />
                         </div>
-                        <button className="flex justify-center items-center rounded-[62px] min-w-[400px] px-[54px] py-[16px] bg-black cursor-pointer" type="submit">
+                        <button className="flex justify-center items-center rounded-[62px] w-full sm:flex-1 px-6 py-4 bg-black cursor-pointer" type="submit">
                             <h2 className="font-satoshi  font-medium text-16 leading-100 text-justify tracking-0 text-white">
                                 Add to Cart
                             </h2>

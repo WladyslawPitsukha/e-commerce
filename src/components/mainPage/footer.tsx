@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export default function Footer() {
     return(
-        <footer className="flex flex-col gap-6 pt-32 pb-20 px-[100px] mt-20 bg-[#F0F0F0] w-full">
-            <section className="flex justify-between">
-                <aside className="flex flex-col items-start gap-[35px]">
+        <footer className="flex flex-col gap-6 pt-16 sm:pt-32 pb-12 sm:pb-20 px-[var(--page-gutter)] mt-20 bg-[#F0F0F0] w-full">
+            <section className="grid grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+                <aside className="col-span-2 lg:col-span-1 flex flex-col items-start gap-[35px]">
                     <div className="flex flex-col items-start gap-6">
-                        <h2 className="text-[32px] font-bold leading-[38.4px] text-left text-black">
+                        <h2 className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
                             SHOP.COM
                         </h2>
                         <p className="font-satoshi text-sm font-normal leading-[22px] text-left text-[#00000099] w-60">
@@ -56,11 +56,11 @@ export default function Footer() {
                 ))}
             </section>
             <hr className="border border-[rgba(0, 0, 0, 0.1)]" />
-            <section className="flex justify-between items-center">
-                <h2 className="font-satoshi text-sm font-normal leading-[18.9px] text-right text-[#00000099]">
+            <section className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                <h2 className="font-satoshi text-sm font-normal leading-[18.9px] text-left text-[#00000099]">
                     Shop.com © 2000-2025, All Rights Reserved
                 </h2>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                     {arrPayments.map((item, index) => (
                         <div
                             className="shadow-[0px_0.45px_4.48px_0px_rgba(183,183,183,0.08),0px_4.48px_8.96px_0px_rgba(183,183,183,0.08)] border-[0.22px] border-[#D6DCE5] bg-white rounded-tl-[5.38px] px-[10px] py-[6px] transition-transform duration-200 hover:scale-105 cursor-pointer"

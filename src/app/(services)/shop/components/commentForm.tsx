@@ -14,7 +14,7 @@ export const CommentForm = ({ onSubmit }: CommentFormProps) => {
         username: "",
         textCom: "",
         grade: 5,
-        posted: new Date().toISOString().split("T")[0]
+        posted: new Date().toISOString().split("T")[0] ?? ""
     });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -22,7 +22,7 @@ export const CommentForm = ({ onSubmit }: CommentFormProps) => {
         onSubmit(comment);
         setComment({
             ...comment,
-            posted: new Date().toISOString().split("T")[0]
+            posted: new Date().toISOString().split("T")[0] ?? ""
         });
     }
 

@@ -14,11 +14,11 @@ export default function SectionCards({
     link,
 }: SectionCardsProps) {
     return(
-        <section className="flex flex-col items-center w-full gap-[55px] mt-[72px]">
-            <h2 className="font-integral text-5xl font-bold leading-[57.6px] text-center text-black uppercase">
+        <section className="flex flex-col items-center w-full gap-8 sm:gap-[55px] mt-12 sm:mt-[72px] px-[var(--page-gutter)]">
+            <h2 className="font-integral text-3xl sm:text-5xl font-bold leading-tight text-center text-black uppercase">
                 {title}
             </h2>
-            <div className="flex justify-evenly items-center gap-[19px]">
+            <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-3 gap-y-8 sm:gap-[19px] w-full">
                 {array.map((item, index) => (
                     <ClothesCard
                         key={index}
@@ -32,7 +32,7 @@ export default function SectionCards({
                 onClick={() => window.location.href = `/${link}`}
                 className="border w-[218px] h-auto rounded-[62px] border-black"
             >
-                <h4 className="font-satoshi w-auto text-base font-medium leading-none tracking-[0%] text-black py-[15px] px-[80px]">
+                <h4 className="font-satoshi w-auto text-base font-medium leading-none tracking-[0%] text-black py-[15px] px-4">
                     View All
                 </h4>
             </button>

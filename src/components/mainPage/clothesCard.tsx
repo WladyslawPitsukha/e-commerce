@@ -8,7 +8,8 @@ import { CreationPrice } from "./creationPrice";
 
 export default function ClothesCard({
     id, 
-    img, 
+    img,
+    images,
     title, 
     grade,
     price,
@@ -21,7 +22,6 @@ export default function ClothesCard({
         option,
         procent
     });
-
     useEffect(() => {
         setCurrentGrade(grade);
     }, [grade]);
@@ -34,20 +34,26 @@ export default function ClothesCard({
         });
     }, [mainPrice, option, procent]);
 
+    const imageSource = img ?? images[0];
+
+    if (!imageSource) {
+        return null;
+    }
+
     return(
         <article 
             className="flex flex-col items-start" 
             key={id}
         >
-            <div className="flex justify-center items-center w-[295px] h-[298px] rounded-2xl bg-[#F0EEED]">
+            <div className="flex justify-center items-center w-full aspect-square max-w-[295px] rounded-2xl bg-[#F0EEED] overflow-hidden">
                 <Image 
-                    className="w-[400px] h-[280px]"
-                    src={img}
+                    className="w-full h-full object-cover"
+                    src={imageSource}
                     alt="product"
                 />
             </div>
             <div className="flex flex-col items-start gap-2 mt-2">
-                <h5 className="font-satoshi text-xl font-bold leading-[32.4px] text-left text-black">
+                <h5 className="font-satoshi text-sm sm:text-xl font-bold leading-tight text-left text-black line-clamp-2">
                     {title}
                 </h5>
                 <CreationGrade
