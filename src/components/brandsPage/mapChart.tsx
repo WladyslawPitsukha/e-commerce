@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { CountryDataProps } from "@/types/typesProject";
@@ -15,6 +15,8 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
     const mapRef = useRef<L.Map | null>(null);
     const markersRef = useRef<L.Marker[]>([]);
     const geoJsonLayerRef = useRef<L.GeoJSON | null>(null);
+    const mapContainerRef = useRef<HTMLDivElement | null>(null);
+    const [mapStatus, setMapStatus] = useState<"loading" | "ready" | "error">("loading");
 
     useEffect(() => {
         if (selectedCountry) {
@@ -37,7 +39,7 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
             resetHighlight();
             markersRef.current.forEach(marker => marker.closePopup());
         }
-    }, [selectedCountry]);
+    }, [countryAll, selectedCountry]);
 
     useEffect(() => {
         if (hoveredCountry && !selectedCountry) {
@@ -48,12 +50,15 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
     }, [hoveredCountry, selectedCountry]);
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
+        if (typeof window === 'undefined' || !mapContainerRef.current) return;
+        const controller = new AbortController();
+        let disposed = false;
         const initMap = async () => {
             try {
                 const leaflet = (await import('leaflet')).default;
-                
-                const map = leaflet.map('map').setView([20, 0], 2);
+                if (disposed || !mapContainerRef.current) return;
+
+                const map = leaflet.map(mapContainerRef.current).setView([20, 0], 2);
                 mapRef.current = map;
                 
                 leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -101,28 +106,30 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
                     }
                 });
                 
-                fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        const geoJsonLayer = leaflet.geoJSON(data, {
-                            style: () => ({
-                                fillColor: 'transparent',
-                                weight: 1,
-                                opacity: 1,
-                                color: 'black',
-                                fillOpacity: 0
-                            })
-                        }).addTo(map);
-                        
-                        geoJsonLayerRef.current = geoJsonLayer;
-                    });
+                const response = await fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json', { signal: controller.signal });
+                if (!response.ok) throw new Error('Could not load map boundaries');
+                const data = await response.json();
+                if (disposed) return;
+                const geoJsonLayer = leaflet.geoJSON(data, {
+                    style: () => ({
+                        fillColor: 'transparent',
+                        weight: 1,
+                        opacity: 1,
+                        color: 'black',
+                        fillOpacity: 0
+                    })
+                }).addTo(map);
+                geoJsonLayerRef.current = geoJsonLayer;
+                setMapStatus("ready");
             } catch (error) {
-                console.error('Error initializing map:', error);
+                if (!disposed && (error as Error).name !== "AbortError") setMapStatus("error");
             }
         };
         initMap();
         
         return () => {
+            disposed = true;
+            controller.abort();
             if (mapRef.current) {
                 markersRef.current.forEach(marker => marker.remove());
                 if (geoJsonLayerRef.current) {
@@ -134,7 +141,7 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
                 geoJsonLayerRef.current = null;
             }
         };
-    }, []);
+    }, [countryAll]);
     
     const highlightCountry = (countryName: string) => {
         if (geoJsonLayerRef.current) {
@@ -162,8 +169,10 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
     };
     
     return (
-        <article className="w-full max-w-[800px] h-[300px] sm:h-[470px] bg-white rounded-lg p-2 sm:p-4">
-            <div id="map" className="w-full h-full rounded-lg"></div>
+        <article className="relative w-full max-w-[800px] h-[300px] sm:h-[470px] bg-white rounded-lg p-2 sm:p-4">
+            <div ref={mapContainerRef} className="w-full h-full rounded-lg" aria-label="Brand country map" />
+            {mapStatus === "loading" && <p className="absolute inset-0 flex items-center justify-center rounded-lg bg-white/80 text-sm text-black/60">Loading map...</p>}
+            {mapStatus === "error" && <p role="alert" className="absolute inset-0 flex items-center justify-center rounded-lg bg-white p-6 text-center text-sm text-black/60">The map is currently unavailable. Country data is still available in the list.</p>}
         </article>
     );
 }

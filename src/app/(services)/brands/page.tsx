@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import Image from "next/image";
 import { arrBrands } from "../../../constants/brands/arrBrands";
 import Footer from "@/components/mainPage/footer";
 import NavBar from "@/components/mainPage/navbar";
@@ -32,11 +33,15 @@ export default function BrandsListPage() {
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-900/20 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
                             {photo ? (
-                                <img
+                                <div className="relative mb-4 h-48 w-full overflow-hidden rounded-md shadow-md">
+                                <Image
                                     src={photo}
                                     alt={name}
-                                    className="w-full h-48 object-cover mb-4 rounded-md group-hover:scale-105 transition-transform duration-300 shadow-md z-10 relative grayscale group-hover:grayscale-0"
+                                    fill
+                                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 320px"
+                                    className="z-10 object-cover grayscale transition-transform duration-300 group-hover:scale-105 group-hover:grayscale-0"
                                 />
+                                </div>
                             ) : (
                                 <BrandingWatermarkIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
                             )}

@@ -1,6 +1,7 @@
 import { ProductCardProps } from "@/types/typesProject";
 import { IoCheckmark } from "react-icons/io5";
 import { DivBlock } from "./headerProduct";
+import Image from "next/image";
 
 export const DivSmallBlock = ({title, value}: {
     title: string;
@@ -100,12 +101,14 @@ export default function DetailsProduct({details, images}:
                     {images.map((image, index) => (
                         <div 
                             key={`${String(image)}-${index}`}
-                            className="flex items-center justify-center w-[200px] h-[170px] bg-gray-200 rounded-lg overflow-hidden"
+                            className="relative flex items-center justify-center w-[200px] h-[170px] bg-gray-200 rounded-lg overflow-hidden"
                         >
-                            <img 
-                                src={typeof image === "string" ? image : image.src} 
+                            <Image
+                                src={image}
                                 alt={`Product image ${index + 1}`} 
-                                className="w-full h-full object-cover"
+                                fill
+                                sizes="(max-width: 1024px) 50vw, 240px"
+                                className="object-cover"
                             />
                         </div>
                     ))}

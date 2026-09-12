@@ -37,14 +37,18 @@ export default function SectBusiness({ country, growth, sales }: {
                     <article className='flex justify-center items-center p-[10px]'>
                         <ul className='text-black list-with-circles'>
                             {country.map(obj => (
-                                <li 
-                                    key={obj.id} 
-                                    className='text-black font text-base sm:text-[20px] cursor-pointer hover:text-gray-600'
-                                    onMouseEnter={() => setHovered(obj.country.countryName)}
-                                    onMouseLeave={() => setHovered(null)}
-                                    onClick={() => handleCountryClick(obj.country.countryName)}
-                                >
-                                    {obj.country.countryName}
+                                <li key={obj.id}>
+                                    <button
+                                        type="button"
+                                        className={`text-left text-black text-base sm:text-[20px] cursor-pointer hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 ${selectedCountry === obj.country.countryName ? "font-bold" : ""}`}
+                                        onMouseEnter={() => setHovered(obj.country.countryName)}
+                                        onMouseLeave={() => setHovered(null)}
+                                        onFocus={() => setHovered(obj.country.countryName)}
+                                        onBlur={() => setHovered(null)}
+                                        onClick={() => handleCountryClick(obj.country.countryName)}
+                                    >
+                                        {obj.country.countryName}
+                                    </button>
                                 </li>
                             ))}
                         </ul>

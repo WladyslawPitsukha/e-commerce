@@ -1,7 +1,7 @@
 "use client"
 
 import { SalesDataProps } from '@/types/typesProject';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function BarChartD({ arrSales }: { arrSales: SalesDataProps[]}) {
     return(
@@ -9,17 +9,9 @@ export default function BarChartD({ arrSales }: { arrSales: SalesDataProps[]}) {
             <h2 className="text-3xl font-bold mb-8 text-black">
                 Growth Distribution of Zara
             </h2>
-            <BarChart
-                width={500}
-                height={400}
-                data={arrSales}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
+            <div className="h-[320px] w-full min-w-0 sm:h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={arrSales} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="year" />
                 <YAxis />
@@ -27,6 +19,8 @@ export default function BarChartD({ arrSales }: { arrSales: SalesDataProps[]}) {
                 <Legend />
                 <Bar dataKey="growth" fill="black" name="Growth" />
             </BarChart>
+            </ResponsiveContainer>
+            </div>
         </article>
     )
 }

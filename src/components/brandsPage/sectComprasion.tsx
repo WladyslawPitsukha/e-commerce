@@ -2,7 +2,7 @@ import { BasicPropsBrand as BasicInfoProps, CountryDataProps } from "@/types/typ
 
 import { arrBrands } from "@/constants/brands/arrBrands";
 
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead } from "@mui/material";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Link from "next/link";
 import { arrCountryZara } from "@/constants/brands/dataOfBrands/zara/arrCountryZara";
 
@@ -80,25 +80,25 @@ export default function SectComprasion() {
                 name={arrBlockBrands[0].name}
                 links={arrBlockBrands[0].links}
             />
-            <TableContainer>
+            <TableContainer className="max-w-full overflow-x-auto">
                 <Table aria-label="simple table">
                     <TableHead>
-                        {tableHeadProps.map((title, index) => (
-                            <TableCell key={`${title}-${index}`}>
-                                <h5 className="w-24">
-                                    {title}
-                                </h5>
-                            </TableCell>
-                        ))}
+                        <TableRow>
+                            {tableHeadProps.map((title, index) => (
+                                <TableCell key={`${title}-${index}`} component="th" scope="col">
+                                    <h5 className="w-24">{title}</h5>
+                                </TableCell>
+                            ))}
+                        </TableRow>
                     </TableHead>
                     <TableBody>
-                        {tableBodyProps.map((title, index) => (
-                            <TableCell key={`${title}-${index}`}>
-                                <h5 className="w-24">
-                                    {title}
-                                </h5>
-                            </TableCell>
-                        ))}
+                        <TableRow>
+                            {tableBodyProps.map((title, index) => (
+                                <TableCell key={`${title}-${index}`}>
+                                    <h5 className="w-24">{title}</h5>
+                                </TableCell>
+                            ))}
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
