@@ -6,7 +6,7 @@ import DetailsProduct from "./detailsProduct";
 import FaqsProduct from "./faqsProduct";
 import HeaderProduct from "./headerProduct";
 import ReviewsProduct from "./reviewsProduct";
-import { ProductCardProps } from "@/types/typeProductCard";
+import { ProductCardProps } from "@/types/typesProject";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -28,7 +28,7 @@ function CustomTabPanel({ children, value, index }: TabPanelProps) {
     );
 }
 
-export default function ProductTabs({ product }: { product: ProductCardProps }) {
+export default function ProductTabs({ product, category }: { product: ProductCardProps; category: string }) {
     const [tabValue, setTabValue] = useState(0);
     const {
         id,
@@ -52,6 +52,7 @@ export default function ProductTabs({ product }: { product: ProductCardProps }) 
                 description={description}
                 price={price}
                 details={details}
+                category={category}
             />
             <section className="flex flex-col items-center w-full px-[var(--page-gutter)]">
                 <Box sx={{ width: "100%" }}>
@@ -81,7 +82,7 @@ export default function ProductTabs({ product }: { product: ProductCardProps }) 
                         <DetailsProduct details={details} images={images} />
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={1}>
-                        <ReviewsProduct array={reviews} />
+                        <ReviewsProduct array={reviews} productId={id} />
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={2}>
                         <FaqsProduct faqs={faqs} />

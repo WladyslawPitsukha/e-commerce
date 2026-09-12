@@ -1,5 +1,4 @@
-import { BasicInfoProps } from "@/types/typeBrands";
-import { CountryDataProps } from "@/types/typeCountryData";
+import { BasicPropsBrand as BasicInfoProps, CountryDataProps } from "@/types/typesProject";
 
 import { arrBrands } from "@/constants/brands/arrBrands";
 

@@ -13,12 +13,6 @@ import { CreateIcon } from "./creationIcon";
 export default function NavBar() {
     const [searchTerm, setSearchTerm] = useState('');
     
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        console.log('Searching process: ', searchTerm);
-    }
-
     return(
         <nav className="flex flex-wrap justify-between gap-4 items-center py-4 px-[var(--page-gutter)] sticky top-0 left-0 bg-white/95 backdrop-blur z-50 w-full border-b border-black/5">
             <Link href="/" className="shrink-0">
@@ -41,7 +35,6 @@ export default function NavBar() {
             <form
                 action="/search"
                 className="relative flex items-center order-2 sm:order-3 flex-1 min-w-[min(100%,14rem)] sm:max-w-[36rem]"
-                onSubmit={handleSubmit}
                 role="search"
                 aria-label="Site search"
             >

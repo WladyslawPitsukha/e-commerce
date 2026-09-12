@@ -1,4 +1,4 @@
-import { ProductCardProps } from "@/types/typeProductCard";
+import { ProductCardProps } from "@/types/typesProject";
 import { IoCheckmark } from "react-icons/io5";
 import { DivBlock } from "./headerProduct";
 

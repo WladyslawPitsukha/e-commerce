@@ -1,7 +1,7 @@
 "use client"
 
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { SalesDataProps } from "@/types/typeSalesProps";
+import { SalesDataProps } from "@/types/typesProject";
 
 export default function PieChartD({ arrGrowth }: {arrGrowth: SalesDataProps[]}) {
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];

@@ -6,10 +6,11 @@ interface CommentFormProps {
         textCom: string;
         grade: number;
         posted: string;
-    }) => void
+    }) => void;
+    isSubmitting?: boolean;
 }
 
-export const CommentForm = ({ onSubmit }: CommentFormProps) => {
+export const CommentForm = ({ onSubmit, isSubmitting = false }: CommentFormProps) => {
     const [comment, setComment] = useState({
         username: "",
         textCom: "",
@@ -19,7 +20,8 @@ export const CommentForm = ({ onSubmit }: CommentFormProps) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(comment);
+        if (!comment.username.trim() || !comment.textCom.trim()) return;
+        onSubmit({ ...comment, username: comment.username.trim(), textCom: comment.textCom.trim() });
         setComment({
             ...comment,
             posted: new Date().toISOString().split("T")[0] ?? ""
@@ -66,9 +68,10 @@ export const CommentForm = ({ onSubmit }: CommentFormProps) => {
             </div>
             <button 
                 type="submit"
+                disabled={isSubmitting}
                 className="px-7 py-3 bg-black text-white rounded-[62px] font-satoshi font-medium text-base"
             >
-                Submit Review
+                {isSubmitting ? "Submitting..." : "Submit Review"}
             </button>
     </form>
     )

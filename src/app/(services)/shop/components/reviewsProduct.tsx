@@ -1,19 +1,32 @@
 "use client"
 
 import CommentBlock from "@/components/mainPage/commentBlock"
-import { ComSectProps } from "@/types/typeComSect"
+import { ComSectProps } from "@/types/typesProject"
 import { PopoverSetBut } from "./popoverSetBut"
 import { CreateIcon } from "@/components/mainPage/creationIcon"
 import { IoIosArrowDown } from "react-icons/io";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CommentForm } from "./commentForm"
 
-export default function ReviewsProduct({array}: {
-    array: ComSectProps[]
+export default function ReviewsProduct({array, productId}: {
+    array: ComSectProps[];
+    productId: number;
 }) {
     const [comments, setComments] = useState<ComSectProps[]>(array);
     const [showForm, setShowForm] = useState(false);
     const [viewMode, setViewMode] = useState<"latest" | "random">("latest");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const storageKey = `shop-reviews-${productId}`;
+
+    useEffect(() => {
+        const stored = window.localStorage.getItem(storageKey);
+        if (!stored) return;
+        try {
+            setComments((current) => [...(JSON.parse(stored) as ComSectProps[]), ...current]);
+        } catch {
+            window.localStorage.removeItem(storageKey);
+        }
+    }, [storageKey]);
 
     const handleCommentSubmit = (commnetData: {
         username: string;
@@ -21,6 +34,8 @@ export default function ReviewsProduct({array}: {
         grade: number;
         posted: string;
     }) => {
+        if (comments.some((comment) => comment.text.username === commnetData.username && comment.text.textCom === commnetData.textCom)) return;
+        setIsSubmitting(true);
         const newComment: ComSectProps = {
             id: comments.length + 1,
             grade: commnetData.grade,
@@ -32,7 +47,9 @@ export default function ReviewsProduct({array}: {
         }
 
         setComments([newComment, ...comments]);
+        window.localStorage.setItem(storageKey, JSON.stringify([newComment]));
         setShowForm(false);
+        setIsSubmitting(false);
     }
     
     const RenderArray = ({arr}: {
@@ -45,9 +62,9 @@ export default function ReviewsProduct({array}: {
 
         return(
             <>
-                {renderArray.map((obj, index) => (
+                {renderArray.map((obj) => (
                     <CommentBlock
-                        key={index}
+                        key={obj.id}
                         {...obj}
                     />
                 ))}
@@ -88,7 +105,7 @@ export default function ReviewsProduct({array}: {
                 </div>
             </div>
             {showForm && (
-                <CommentForm onSubmit={handleCommentSubmit} />
+                <CommentForm onSubmit={handleCommentSubmit} isSubmitting={isSubmitting} />
             )}
             <div className="grid grid-cols-2 items-center gap-5 w-full">
                 <RenderArray arr={comments} />

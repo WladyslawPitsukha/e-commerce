@@ -1,4 +1,4 @@
-import { LinksPageFilterProps } from "@/types/typeLinksFilt";
+import { LinksPageFilterProps } from "@/types/typesProject";
 
 export const linksPageFilter: LinksPageFilterProps[] = [
     {

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import AnimatedTitle from "./animatedTitle";
-import { ProductProps } from "../../types/typeProductProps";
+import { ProductProps } from "../../types/typesProject";
 
 interface HeaderProps {
     id: number;

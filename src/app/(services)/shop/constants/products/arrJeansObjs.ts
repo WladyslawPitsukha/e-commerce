@@ -1,7 +1,7 @@
 import Jeans1 from "@/assets/img/jeans/jeans1.png";
 import Jeans2 from "@/assets/img/jeans/jeans2.png";
 
-import { ClotheMainObjProps } from "@/types/typeProductCard";
+import { ClotheMainObjProps } from "@/types/typesProject";
 
 export const arrJeansObjs: ClotheMainObjProps[] = [
     {

@@ -1,4 +1,4 @@
-import { ProductCardProps } from "@/types/typeProductCard";
+import { ProductCardProps } from "@/types/typesProject";
 
 
 export default function FaqsProduct({faqs}: 

@@ -1,4 +1,4 @@
-import { DressStyle } from "@/types/typeDressStyle"
+import { DressStyle } from "@/types/typesProject"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -13,7 +13,7 @@ const BlockDressStyle = ({
 }) => {
     return(
         arr.slice(num1, num2).map(style => (
-            <Link href={`/shop/${style.link}`} key={style.id}>
+            <Link href={`/shop${style.link.startsWith("/") ? style.link : `/${style.link}`}`} key={style.id}>
                 <article
                     className="z-10 overflow-hidden relative bg-color-white rounded-[20px] h-[220px] sm:h-[289px] w-full py-5 px-6 sm:py-[25px] sm:px-9"
                 >

@@ -6,7 +6,7 @@ import { SlBasket } from "react-icons/sl";
 export const arrIconNavlinks: NavLinkProps[] = [
     {
         icon: SlBasket,
-        link: "",
+        link: "cart",
     },
     {
         icon: RiAccountCircleLine,

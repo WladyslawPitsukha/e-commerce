@@ -1,4 +1,6 @@
-import { ClotheMainObjProps } from "@/types/typeProductCard"
+"use client";
+
+import { ClotheMainObjProps } from "@/types/typesProject"
 
 import Image from "next/image"
 

@@ -1,6 +1,6 @@
 import Short1 from "@/assets/img/short/short1.png";
 
-import { ClotheMainObjProps } from "@/types/typeProductCard";
+import { ClotheMainObjProps } from "@/types/typesProject";
 
 export const arrShortsObj: ClotheMainObjProps[] = [
     {

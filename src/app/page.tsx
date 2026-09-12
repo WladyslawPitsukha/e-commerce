@@ -8,10 +8,9 @@ import SectionComment from "@/components/mainPage/sectionComment";
 import SectionStyle from "@/components/mainPage/sectionStyle";
 
 import { arrDressStyle } from "@/constants/arrDressStyle";
-import { ClotheMainObjProps } from "@/types/typeProductCard";
+import { ClotheMainObjProps } from "@/types/typesProject";
 
 import useRandomCards from "@/utils/randomCards";
-import { useEffect } from "react";
 
 interface SectionArtProps {
     id: number;
@@ -30,15 +29,6 @@ const DRESS_STYLE_CONFIG = {
 export default function MainPage() {
     const newArrivals = useRandomCards();
     const topSelling = useRandomCards();
-
-    useEffect(() => {
-        try {
-            newArrivals.getRandomCard();
-            topSelling.getRandomCard();
-        } catch (error) {
-            console.error("Error loading random cards:", error);
-        }
-    }, []);
 
     const sections: SectionArtProps[] = [
         {

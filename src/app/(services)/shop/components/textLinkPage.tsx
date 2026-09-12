@@ -3,7 +3,7 @@
 //TODO: add finish the components
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
-import { LinksPageFilterProps } from "@/types/typeLinksFilt";
+import { LinksPageFilterProps } from "@/types/typesProject";
 import Link from "next/link";
 
 export default function TextLinkPage({

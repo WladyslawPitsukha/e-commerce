@@ -2,13 +2,15 @@
 
 import { CreationGrade } from "@/components/mainPage/creationGrade";
 import { CreationPrice } from "@/components/mainPage/creationPrice";
-import { HeaderCardProps } from "@/types/typeProductCard";
+import { HeaderCardProps } from "@/types/typesProject";
 
 import { IoCheckmark } from "react-icons/io5";
 
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import { useCart } from "@/components/cart/cartProvider";
+import { getProductSlug } from "@/utils/productRoutes";
 
 export const ButtonAmount = ({type, func}: {
     type: 'increase' | 'decrease'
@@ -57,10 +59,15 @@ export default function HeaderProduct({
     price,
     description,
     details,
+    category,
 
-}: HeaderCardProps) {
+}: HeaderCardProps & { category: string }) {
     const [imageChoice, setImageChoice] = useState(images[0] ?? "");
     const [amountProduct, setAmountProduct] = useState<number>(0);
+    const [selectedSize, setSelectedSize] = useState(details.sizes[0]?.title ?? "");
+    const [selectedColor, setSelectedColor] = useState(details.colors.find((color) => color.status)?.title ?? details.colors[0]?.title ?? "");
+    const [addedToCart, setAddedToCart] = useState(false);
+    const { addItem } = useCart();
 
     const { mainPrice, option, procent } = price;
     const { sizes, colors } = details;
@@ -85,6 +92,22 @@ export default function HeaderProduct({
             setAmountProduct(prev => prev - 1)
         }
     }
+
+    const handleAddToCart = () => {
+        if (amountProduct < 1 || !images[0]) return;
+        addItem({
+            category,
+            productId: id,
+            slug: getProductSlug({ id, title, images, grade, price, description, details, reviews: [], faqs: [] }),
+            title,
+            image: typeof images[0] === "string" ? images[0] : images[0].src,
+            unitPrice: mainPrice,
+            quantity: amountProduct,
+            size: selectedSize,
+            color: selectedColor,
+        });
+        setAddedToCart(true);
+    };
 
     const textItemsBlock = "flex flex-col items-start justify-center";
 
@@ -141,9 +164,9 @@ export default function HeaderProduct({
                         component={
                             <div className="flex justify-center items-center gap-4">
                             {colors.map((color) => (
-                                <div className={`flex justify-center cursor-pointer items-center rounded-full w-[37px] h-[37px]`} style={{background: color.option}} key={color.id}>
+                                <button type="button" aria-label={`Select ${color.title}`} onClick={() => setSelectedColor(color.title)} className={`flex justify-center cursor-pointer items-center rounded-full w-[37px] h-[37px] ${selectedColor === color.title ? "ring-2 ring-black ring-offset-2" : ""}`} style={{background: color.option}} key={color.id}>
                                     {color.status === true ? (<IoCheckmark className={`w-4 h-4 text-white`} />) : null }
-                                </div>
+                                </button>
                             ))}
                         </div>
                         }
@@ -155,14 +178,15 @@ export default function HeaderProduct({
                         component= {
                             <div className="flex flex-wrap justify-start items-center gap-3">
                                 {sizes.map((size) => (
-                                    <div 
+                                    <button type="button" onClick={() => setSelectedSize(size.title)}
                                         className={`w-auto h-auto py-3 px-6 bg-[#f0f0f0] rounded-[62px] cursor-pointer`}
+                                        aria-pressed={selectedSize === size.title}
                                         key={size.id}
                                     >
                                         <h3 className={`font-satoshi font-normal text-16 leading-100 tracking-0 text-black/60`}>
                                             {size.title}
                                         </h3>
-                                    </div>
+                                    </button>
                                 ))}
                             </div>
                         }
@@ -181,9 +205,9 @@ export default function HeaderProduct({
                                 func={incrAmount}
                             />
                         </div>
-                        <button className="flex justify-center items-center rounded-[62px] w-full sm:flex-1 px-6 py-4 bg-black cursor-pointer" type="submit">
+                        <button className="flex justify-center items-center rounded-[62px] w-full sm:flex-1 px-6 py-4 bg-black cursor-pointer" type="button" onClick={handleAddToCart}>
                             <h2 className="font-satoshi  font-medium text-16 leading-100 text-justify tracking-0 text-white">
-                                Add to Cart
+                                {addedToCart ? "Added to Cart" : "Add to Cart"}
                             </h2>
                         </button>
                     </div>

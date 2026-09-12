@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Roboto_Mono } from "next/font/google";
+import { CartProvider } from "@/components/cart/cartProvider";
 
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
@@ -26,7 +27,7 @@ export default function ShopLayout({
   return (
     <html lang="en">
       <body className={`${roboto_mono.className} bg-white m-0`}>
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import { ComSectProps } from "@/types/typeComSect";
+import { ComSectProps } from "@/types/typesProject";
 import { FaCircleCheck } from "react-icons/fa6";
 import { CreationGrade } from "./creationGrade";
 

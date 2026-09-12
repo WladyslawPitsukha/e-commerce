@@ -7,7 +7,7 @@ import { arrTshirtsObjs } from "@/app/(services)/shop/constants/products/arrTshi
 import { arrShirtsObjs } from "@/app/(services)/shop/constants/products/arrShirtsObjs";
 import { arrJeansObjs } from "@/app/(services)/shop/constants/products/arrJeansObjs";
 import { arrShortsObj } from "@/app/(services)/shop/constants/products/arrShortsObjs";
-import { ClotheMainObjProps } from "@/types/typeProductCard";
+import { ClotheMainObjProps } from "@/types/typesProject";
 
 
 

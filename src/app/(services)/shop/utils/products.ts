@@ -5,7 +5,7 @@ import { partywearProducts } from "@/constants/category'/party/arrDataProducts";
 import { summerwearProducts } from "@/constants/category'/summer/arrDataProducts";
 import { winterwearProducts } from "@/constants/category'/winter/arrDataProducts";
 
-import { ProductCardProps } from "@/types/typeProductCard";
+import { ProductCardProps } from "@/types/typesProject";
 
 
 export const allProducts: ProductCardProps[] = [

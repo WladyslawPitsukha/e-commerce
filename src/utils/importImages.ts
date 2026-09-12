@@ -1,4 +1,4 @@
-import { ClotheMainObjProps } from "@/types/typeProductCard";
+import { ClotheMainObjProps } from "@/types/typesProject";
 
 
 export function importImages(category: string, id: number): ClotheMainObjProps["img"][] {

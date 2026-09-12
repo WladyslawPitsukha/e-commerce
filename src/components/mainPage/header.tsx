@@ -3,7 +3,7 @@ import Models from '@/assets/img/models.png'
 import { PiStarFourFill } from "react-icons/pi";
 
 import { arrAmount } from "@/constants/arrAmount";
-import { AmountProps } from "@/types/amountProps";
+import { AmountProps } from "@/types/typesProject";
 
 export const AmountBlock:React.FC<AmountProps> = ({id, amount, title}) => {
     return(

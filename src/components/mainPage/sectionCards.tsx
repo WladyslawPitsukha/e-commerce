@@ -1,4 +1,4 @@
-import { ClotheMainObjProps } from "@/types/typeProductCard";
+import { ClotheMainObjProps } from "@/types/typesProject";
 import ClothesCard from "./clothesCard";
 
 interface SectionCardsProps {

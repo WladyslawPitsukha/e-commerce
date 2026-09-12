@@ -5,8 +5,7 @@ import BarChartD from './diagrams/barChartD';
 import MapChart from "./mapChart";
 
 import { useState } from "react";
-import { CountryDataProps } from "@/types/typeCountryData";
-import { SalesDataProps } from "@/types/typeSalesProps";
+import { CountryDataProps, SalesDataProps } from "@/types/typesProject";
 
 export default function SectBusiness({ country, growth, sales }: {
     country: CountryDataProps[],
