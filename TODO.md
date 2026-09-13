@@ -1,71 +1,16 @@
-# Project TODO
-
-## P0: Stability and Correctness
-
-- [x] Keep one Next configuration file. Merge the needed settings into `next.config.ts`, remove `next.config.js`, and use the correct `transpilePackages` option.
-- [x] Add documented commands for `dev`, `build`, `start`, `typecheck`, and linting.
-- [x] Add a clean-build script that removes `.next` before rebuilding when generated chunks become inconsistent.
-- [x] Document that `next dev`, `next build`, and `next start` must not run concurrently against the same `.next` directory.
-- [x] Implement category-aware routing in `src/app/(services)/shop/[category]/page.tsx` instead of always rendering the first activewear product.
-- [x] Validate unknown shop categories and return a proper `notFound()` page.
-- [x] Add product detail routing by product slug or product id instead of selecting `activewearProducts[0]`.
-- [x] Move shared product, brand, review, and filter types into one canonical type module and remove compatibility re-export files after imports are migrated.
-- [ ] Remove duplicate or stale data sources under `src/constants`, `src/data`, and `src/assets` where the same content is maintained twice.
-- [x] Add safe empty-state handling for missing products, empty brand photos, missing images, and empty filter results.
-- [ ] Replace `console.error` UI error paths with user-visible error boundaries or route-level error components.
-
 ## P1: Shop and Commerce Flows
 
-- [x] Make the search form perform a real product search and add a search results route.
-- [x] Add active filter state for price, colors, sizes, and dress style.
-- [x] Make filter controls update the product list instead of being presentational only.
-- [x] Add a mobile filter drawer with open/close behavior and focus management.
-- [x] Replace the hard-coded "Most Popular" sort label with working sort options.
-- [x] Add sorting by popularity, price ascending, price descending, rating, and newest.
-- [x] Make pagination preserve filter and sort state.
-- [x] Use stable product links on every product card.
-- [x] Implement add-to-cart behavior from product detail pages.
-- [x] Implement cart quantity updates, removal, subtotal, and empty-cart states.
-- [x] Add cart persistence using the existing cart model or a browser storage adapter.
 - [ ] Connect the checkout/order flow to the existing order and user models.
-- [x] Add review submission persistence and validation.
-- [x] Prevent duplicate review submissions and show submission/loading states.
-- [x] Add loading, error, and not-found UI for every shop route.
 - [ ] Add a shared product card component contract so `img` and `images` cannot disagree.
-
-## P1: Brand Experience
-
-- [x] Replace the brand list `<img>` elements with `next/image` and add dimensions or `fill` containers.
-- [x] Replace product detail gallery `<img>` elements with `next/image`.
-- [x] Add responsive chart sizing tests for phone, tablet, and desktop widths.
-- [x] Make the Leaflet map initialize once per country dataset and clean up all event listeners.
-- [x] Add a map loading placeholder and an offline/error state when GeoJSON cannot load.
-- [x] Avoid using a fixed DOM id of `map` if multiple brand pages can be mounted together.
-- [x] Add keyboard-accessible country selection and visible focus states.
-- [x] Fix the comparison table semantics by adding table rows and table cells in valid structure.
-- [x] Make the comparison table horizontally scrollable without forcing the whole page to overflow.
-- [x] Add brand not-found and invalid-slug tests.
 
 ## P1: Responsive UI and Accessibility
 
-- [ ] Test all routes at 320px, 375px, 768px, 1024px, and 1440px widths.
 - [ ] Add browser-based screenshot checks for home, shop, product, brands, and brand-detail routes. Playwright was removed from this machine; use another browser test tool when this work resumes.
-- [x] Remove remaining fixed-width UI that causes overflow on narrow devices.
-- [x] Replace index keys with stable entity keys in all remaining mapped lists.
-- [x] Add accessible names to icon-only controls and verify tooltips for unfamiliar icons.
-- [x] Ensure all buttons have visible keyboard focus styles.
 - [ ] Verify heading hierarchy on every route.
-- [x] Add `aria-current` and active-state styling to navigation links.
-- [x] Add skip navigation and landmark labels for the main navigation and footer.
 - [ ] Check color contrast for gray text, gradient brand cards, and chart labels.
-- [x] Respect reduced-motion preferences for animated titles, hover effects, and page reveals.
-- [x] Replace placeholder links such as `/company/about`, `/company/features`, and `/company/works` with real pages or disabled states.
-- [x] Fix typography naming inconsistencies such as `font-inegral` and consolidate font loading.
 
 ## P2: Performance and Code Quality
 
-- [x] Resolve all remaining React hook dependency warnings without suppressing lint rules.
-- [x] Memoize or redesign the random-card hook so it does not recreate unstable callbacks on every render.
 - [ ] Remove the redundant `useEffect` state synchronization in product cards where props can be rendered directly.
 - [ ] Replace dynamic `require()` image loading with static imports or a generated asset manifest.
 - [ ] Remove the lint suppression around dynamic image loading once the asset manifest exists.
@@ -102,7 +47,7 @@
 - [ ] Add integration tests for cart-to-order behavior.
 - [ ] Add accessibility checks with axe or an equivalent test runner.
 - [ ] Add visual regression tests for the primary responsive breakpoints.
-- [ ] Expand README with setup, environment variables, data conventions, and deployment steps.
+- [ ] Expand README with setup, environment variables, data conventiocouns, and deployment steps.
 - [ ] Add a contribution guide describing the source/constants/data split.
 - [ ] Add a changelog or release notes process for user-visible behavior.
 - [ ] Record supported browsers and minimum Node.js version.
