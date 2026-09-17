@@ -11,9 +11,9 @@ export const AmountBlock:React.FC<AmountProps> = ({id, amount, title}) => {
             <h2 className="text-[40px] font-bold leading-[54px] text-left text-black">
                 {amount}
             </h2>
-            <h5 className="text-[16px] font-normal leading-[22px] text-left text-black/60">
+            <p className="text-[16px] font-normal leading-[22px] text-left text-black/60">
                 {title}
-            </h5>
+            </p>
         </div>
     )
 }
@@ -31,9 +31,9 @@ export default function Header() {
                 <button 
                     className="w-52 h-14 py-4 px-8 bg-black rounded-full"
                 >
-                    <h5 className="text-white text-custom-16 font-medium leading-custom-21.6 text-left">
+                    <span className="text-white text-custom-16 font-medium leading-custom-21.6 text-left">
                         Shop Now
-                    </h5>
+                    </span>
                 </button>
                 <article className="flex flex-wrap justify-start gap-5 sm:gap-0 w-full">
                     {arrAmount.map((arr) => (

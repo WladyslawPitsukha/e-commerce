@@ -78,12 +78,12 @@ export default function CommentBlock({
             </div>
             {date ? (
                 <div className="flex justify-between w-full">
-                    <h5 className="font-satoshi text-base font-normal leading-[22px] tracking-[0%] text-black/30">
+                    <p className="font-satoshi text-base font-normal leading-[22px] tracking-[0%] text-black/60">
                         posted {timeDif(date)} days ago
-                    </h5>
-                    <h4 className="font-satoshi font-medium text-base leading-[22px] tracking-[0%] text-black">
+                    </p>
+                    <p className="font-satoshi font-medium text-base leading-[22px] tracking-[0%] text-black">
                         {date ? `Posted on ${dateOfPosted}` : 'Date not available'}
-                    </h4>
+                    </p>
                 </div>) : (
                     undefined
                 )}

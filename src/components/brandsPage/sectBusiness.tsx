@@ -1,11 +1,24 @@
 "use client"
 
-import PieChartD from './diagrams/pieChartD';
-import BarChartD from './diagrams/barChartD';
-import MapChart from "./mapChart";
-
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { CountryDataProps, SalesDataProps } from "@/types/typesProject";
+
+const chartLoading = () => <div className="h-[320px] w-full animate-pulse rounded-xl bg-black/5 sm:h-[400px]" aria-label="Loading chart" />;
+const mapLoading = () => <div className="h-[320px] w-full animate-pulse rounded-xl bg-black/5" aria-label="Loading map" />;
+
+const PieChartD = dynamic(() => import("./diagrams/pieChartD"), {
+    ssr: false,
+    loading: chartLoading,
+});
+const BarChartD = dynamic(() => import("./diagrams/barChartD"), {
+    ssr: false,
+    loading: chartLoading,
+});
+const MapChart = dynamic(() => import("./mapChart"), {
+    ssr: false,
+    loading: mapLoading,
+});
 
 export default function SectBusiness({ country, growth, sales }: {
     country: CountryDataProps[],

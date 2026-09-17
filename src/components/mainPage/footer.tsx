@@ -40,11 +40,11 @@ export default function Footer() {
                         </h3>
                         {obj.array.map((linkObj) => linkObj.link ? (
                             <a key={linkObj.textLink} href={linkObj.link} className="underline-offset-0 cursor-pointer" aria-label={linkObj.textLink}>
-                                <h5 
+                                <span
                                     className="font-satoshi text-base font-normal text-left text-[#00000099] hover:text-black transition-colors duration-150"
                                 >
                                     {linkObj.textLink}
-                                </h5>
+                                </span>
                             </a>
                         ) : (
                             <span key={linkObj.textLink} aria-disabled="true" className="cursor-not-allowed text-base text-[#00000066]">
@@ -63,7 +63,7 @@ export default function Footer() {
                     {arrPayments.map((item, index) => (
                         <div
                             className="shadow-[0px_0.45px_4.48px_0px_rgba(183,183,183,0.08),0px_4.48px_8.96px_0px_rgba(183,183,183,0.08)] border-[0.22px] border-[#D6DCE5] bg-white rounded-tl-[5.38px] px-[10px] py-[6px] transition-transform duration-200 hover:scale-105 cursor-pointer"
-                            key={String(item)}
+                            key={`payment-${index}`}
                         >
                             <Image 
                                 className="w-10 h-4"

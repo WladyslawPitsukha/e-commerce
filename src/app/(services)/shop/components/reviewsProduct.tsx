@@ -79,9 +79,9 @@ export default function ReviewsProduct({array, productId}: {
                     <h2 className="font-satoshi font-bold text-2xl leading-100 text-black">
                         All Reviews
                     </h2> 
-                    <h4 className="font-satoshi font-normal text-base leading-trim-cap text-black/60">
+                    <span className="font-satoshi font-normal text-base leading-trim-cap text-black/60">
                         ({comments.length})
-                    </h4>
+                    </span>
                 </div>
                 <div className="flex items-center gap-[10px]">
                     <PopoverSetBut />

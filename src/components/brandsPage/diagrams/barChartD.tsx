@@ -13,10 +13,10 @@ export default function BarChartD({ arrSales }: { arrSales: SalesDataProps[]}) {
             <ResponsiveContainer width="100%" height="100%">
             <BarChart data={arrSales} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="year" />
-                <YAxis />
+                <XAxis dataKey="year" tick={{ fill: "#111827" }} />
+                <YAxis tick={{ fill: "#111827" }} />
                 <Tooltip />
-                <Legend />
+                <Legend wrapperStyle={{ color: "#111827" }} />
                 <Bar dataKey="growth" fill="black" name="Growth" />
             </BarChart>
             </ResponsiveContainer>

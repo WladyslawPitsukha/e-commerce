@@ -9,9 +9,9 @@ export const DivSmallBlock = ({title, value}: {
 }) => {
     return(
         <div className="flex flex-col items-start gap-2">
-            <h4 className="font-satoshi font-normal text-base leading-100 text-black/60">
+            <span className="font-satoshi font-normal text-base leading-100 text-black/60">
                 {title}: 
-            </h4>
+            </span>
             <p className="font-satoshi font-medium text-base leading-100 text-black">
                 {value}mm
             </p>
@@ -64,9 +64,9 @@ export default function DetailsProduct({details, images}:
                                                 {size.n_size}
                                             </p>
                                         </div>
-                                        <h4 className="font-satoshi font-normal text-base leading-100 text-black/60">
+                                        <span className="font-satoshi font-normal text-base leading-100 text-black/60">
                                             {size.title}
-                                        </h4>
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -88,9 +88,9 @@ export default function DetailsProduct({details, images}:
                                                 <IoCheckmark className="w-4 h-4 text-white" />
                                             )}
                                         </div>
-                                        <h4 className="font-satoshi font-normal text-base leading-100 text-black/60">
+                                        <span className="font-satoshi font-normal text-base leading-100 text-black/60">
                                             {color.title}
-                                        </h4>
+                                        </span>
                                     </div>
                                 ))}
                             </div>

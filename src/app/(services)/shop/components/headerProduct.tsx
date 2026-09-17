@@ -43,9 +43,9 @@ export const DivBlock = ({title, component, className = "", classNameTitle = ""}
 ) => {
     return(
         <div className={`${className}`}>
-            <h3 className={`${classNameTitle}`}>
+            <h2 className={`${classNameTitle}`}>
                 {title}
-            </h3>
+            </h2>
             {component}
         </div>
     )
@@ -183,9 +183,9 @@ export default function HeaderProduct({
                                         aria-pressed={selectedSize === size.title}
                                         key={size.id}
                                     >
-                                        <h3 className={`font-satoshi font-normal text-16 leading-100 tracking-0 text-black/60`}>
+                                        <span className={`font-satoshi font-normal text-16 leading-100 tracking-0 text-black/60`}>
                                             {size.title}
-                                        </h3>
+                                        </span>
                                     </button>
                                 ))}
                             </div>

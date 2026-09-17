@@ -21,7 +21,7 @@ export default function SectionCards({
             <div className="grid grid-cols-2 lg:grid-cols-4 justify-items-center gap-x-3 gap-y-8 sm:gap-[19px] w-full">
                 {array.map((item) => (
                     <ClothesCard
-                        key={item.id}
+                        key={`${item.id}-${item.title}`}
                         {...item}
                     />
                 ))}
@@ -32,9 +32,9 @@ export default function SectionCards({
                 onClick={() => window.location.href = `/${link}`}
                 className="border w-[218px] h-auto rounded-[62px] border-black"
             >
-                <h4 className="font-satoshi w-auto text-base font-medium leading-none tracking-[0%] text-black py-[15px] px-4">
+                <span className="font-satoshi w-auto text-base font-medium leading-none tracking-[0%] text-black py-[15px] px-4">
                     View All
-                </h4>
+                </span>
             </button>
         </section>
     )

@@ -14,13 +14,13 @@ export default function PieChartD({ arrGrowth }: {arrGrowth: SalesDataProps[]}) 
             <div className="w-full h-[320px] sm:h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                        <Pie data={arrGrowth} cx="50%" cy="45%" labelLine={false} outerRadius="62%" fill="white" dataKey="growth" nameKey="year" label={({name}) => `${name}`}>
+                        <Pie data={arrGrowth} cx="50%" cy="45%" labelLine={false} outerRadius="62%" fill="white" dataKey="growth" nameKey="year" label={{ fill: "#111827" }}>
                             {arrGrowth.map((item, index) => (
                                 <Cell key={`cell-${item.year}-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Pie>
                         <Tooltip />
-                        <Legend />
+                        <Legend wrapperStyle={{ color: "#111827" }} />
                     </PieChart>
                 </ResponsiveContainer>
             </div>

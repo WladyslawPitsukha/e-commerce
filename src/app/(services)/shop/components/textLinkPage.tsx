@@ -20,9 +20,9 @@ export default function TextLinkPage({
                 href={link}
                 className='cursor-pointer'
             >
-                <h5 className="font-satoshi font-normal text-base leading-100 tracking-0 text-black/60">
+                <span className="font-satoshi font-normal text-base leading-100 tracking-0 text-black/60">
                     {name}
-                </h5>
+                </span>
             </Link>
             <NavigateNextIcon 
                 className='w-4 h-4 text-black/60'

@@ -18,9 +18,9 @@ export function BlockArtComprasion({
             className="flex flex-col items-center justify-between" 
             key={id}
         >
-            <h4 className="text-black">
+            <h2 className="text-black">
                 {name}
-            </h4>
+            </h2>
             <div>
                 {[{
                     link: links.mainLink,
@@ -30,9 +30,9 @@ export function BlockArtComprasion({
                     title: "The website",
                 }].map((obj) => (
                     <Link href={obj.link} key={obj.title}>
-                        <h5 className="text-black">
+                        <span className="text-black">
                             {obj.title}
-                        </h5>
+                        </span>
                     </Link>
                 ))}
             </div>
@@ -86,7 +86,7 @@ export default function SectComprasion() {
                         <TableRow>
                             {tableHeadProps.map((title, index) => (
                                 <TableCell key={`${title}-${index}`} component="th" scope="col">
-                                    <h5 className="w-24">{title}</h5>
+                                    <span className="w-24">{title}</span>
                                 </TableCell>
                             ))}
                         </TableRow>
@@ -95,7 +95,7 @@ export default function SectComprasion() {
                         <TableRow>
                             {tableBodyProps.map((title, index) => (
                                 <TableCell key={`${title}-${index}`}>
-                                    <h5 className="w-24">{title}</h5>
+                                    <span className="w-24">{title}</span>
                                 </TableCell>
                             ))}
                         </TableRow>

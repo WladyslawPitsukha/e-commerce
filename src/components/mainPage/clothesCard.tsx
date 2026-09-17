@@ -35,9 +35,9 @@ export default function ClothesCard({
                 />
             </div>
             <div className="flex flex-col items-start gap-2 mt-2">
-                <h3 className="font-satoshi text-sm sm:text-xl font-bold leading-tight text-left text-black line-clamp-2">
+                <h2 className="font-satoshi text-sm sm:text-xl font-bold leading-tight text-left text-black line-clamp-2">
                     {title}
-                </h3>
+                </h2>
                 <CreationGrade
                     grade={grade} 
                     className="black" 
