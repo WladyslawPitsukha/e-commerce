@@ -106,7 +106,7 @@ export default function MapChart({hoveredCountry, selectedCountry, countryAll}: 
                     }
                 });
                 
-                const response = await fetch('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json', { signal: controller.signal });
+                const response = await fetch('/api/brand-map', { signal: controller.signal });
                 if (!response.ok) throw new Error('Could not load map boundaries');
                 const data = await response.json();
                 if (disposed) return;

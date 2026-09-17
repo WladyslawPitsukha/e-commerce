@@ -1,3 +1,13 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": "next/core-web-vitals",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "sort-imports": ["warn", { "ignoreDeclarationSort": true, "ignoreMemberSort": false }],
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      { "selector": "variable", "format": ["camelCase", "UPPER_CASE"], "leadingUnderscore": "allow" },
+      { "selector": "function", "format": ["camelCase", "PascalCase"] },
+      { "selector": "parameter", "format": ["camelCase"], "leadingUnderscore": "allow" }
+    ]
+  }
 }

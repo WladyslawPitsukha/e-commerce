@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { connectToDatabase } from "@/lib/mongodb";
 import { Order } from "@/models/order";
 import { User } from "@/models/user";
+
+export const dynamic = "force-dynamic";
 
 type CheckoutItem = {
     productId: number;
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "One or more cart items are invalid." }, { status: 400 });
         }
 
+        const { connectToDatabase } = await import("@/lib/mongodb");
         await connectToDatabase();
         const user = await User.findOne({ email }).select("_id").lean();
         if (!user) {
