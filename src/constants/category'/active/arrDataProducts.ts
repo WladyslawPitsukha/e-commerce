@@ -7,7 +7,6 @@ import { ProductCardProps } from "@/types/typesProject";
 export const activewearProducts: ProductCardProps[] = [
     {
         id: 1,
-        img: ActivewearNike1_1,
         title: "Nike Sports T-shirt",
         grade: 4.5,
         price: {

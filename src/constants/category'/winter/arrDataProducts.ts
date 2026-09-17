@@ -7,7 +7,6 @@ import { ProductCardProps } from "@/types/typesProject";
 export const winterwearProducts: ProductCardProps[] = [
     {
         id: 1,
-        img: WinterwearGucci1_1,
         title: "Wool cardigan with pockets",
         grade: 4.5,
         price: {

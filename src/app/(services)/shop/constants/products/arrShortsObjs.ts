@@ -5,10 +5,9 @@ import { ClotheMainObjProps } from "@/types/typesProject";
 export const arrShortsObj: ClotheMainObjProps[] = [
     {
         id: 1,
-        img: Short1,
         title: "Loose Fit Bermuda Shorts",
         grade: 4.5,
-        images: [],
+        images: [Short1],
         price: {
             mainPrice: 80,
             option: false,

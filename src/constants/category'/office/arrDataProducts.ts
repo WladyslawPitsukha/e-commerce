@@ -11,7 +11,6 @@ import { ProductCardProps } from "@/types/typesProject"
 export const officewearProducts: ProductCardProps[] = [
     {
         id: 1,
-        img: OfficewearCalvin1_1,
         title: 'Black Shirt Calvin Klein',
         grade: 4.5,
         price: {
@@ -126,7 +125,6 @@ export const officewearProducts: ProductCardProps[] = [
     },
     {
         id: 2,
-        img: OfficewearZara1_1,
         title: 'Black T-shirt Zara',
         grade: 2,
         price: {

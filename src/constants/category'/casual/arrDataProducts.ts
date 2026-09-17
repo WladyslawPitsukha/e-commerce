@@ -7,7 +7,6 @@ import { ProductCardProps } from "@/types/typesProject";
 export const casualwearProducts: ProductCardProps[] = [
     {
         id: 1,
-        img: CasualstyleGucci1_1,
         title: "Gucci T-shirt L Cotton Black",
         grade: 4.5,
         price: {

@@ -4,13 +4,11 @@ import { ClotheMainObjProps } from "@/types/typesProject"
 
 import Image from "next/image"
 
-import { useEffect, useState } from "react";
 import { CreationGrade } from "./creationGrade";
 import { CreationPrice } from "./creationPrice";
 
 export default function ClothesCard({
     id, 
-    img,
     images,
     title, 
     grade,
@@ -18,25 +16,7 @@ export default function ClothesCard({
 }: ClotheMainObjProps) {
 
     const { mainPrice, option, procent } = price;
-    const [currentGrade, setCurrentGrade] = useState(grade);
-    const [currentPrice, setCurrentPrice] = useState({
-        mainPrice,
-        option,
-        procent
-    });
-    useEffect(() => {
-        setCurrentGrade(grade);
-    }, [grade]);
-
-    useEffect(() => {
-        setCurrentPrice({
-            mainPrice,
-            option,
-            procent
-        });
-    }, [mainPrice, option, procent]);
-
-    const imageSource = img ?? images[0];
+    const imageSource = images[0];
 
     if (!imageSource) {
         return null;
@@ -55,17 +35,17 @@ export default function ClothesCard({
                 />
             </div>
             <div className="flex flex-col items-start gap-2 mt-2">
-                <h5 className="font-satoshi text-sm sm:text-xl font-bold leading-tight text-left text-black line-clamp-2">
+                <h3 className="font-satoshi text-sm sm:text-xl font-bold leading-tight text-left text-black line-clamp-2">
                     {title}
-                </h5>
+                </h3>
                 <CreationGrade
-                    grade={currentGrade} 
+                    grade={grade} 
                     className="black" 
                 />
                 <CreationPrice
-                    mainPrice={currentPrice.mainPrice} 
-                    option={currentPrice.option} 
-                    procent={currentPrice.procent}
+                    mainPrice={mainPrice} 
+                    option={option} 
+                    procent={procent}
                 />
             </div>
         </article>

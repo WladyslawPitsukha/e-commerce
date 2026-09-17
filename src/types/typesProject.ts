@@ -67,8 +67,7 @@ export interface SalesDataProps extends BaseEntity {
 }
 
 export interface ClotheMainObjProps extends BaseEntity {
-    img?: ImageType;
-    images: ImageType[];
+    images: [ImageType, ...ImageType[]];
     title: string;
     grade: number;
     price: {

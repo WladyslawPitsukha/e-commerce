@@ -6,10 +6,9 @@ import { ClotheMainObjProps } from "@/types/typesProject";
 export const arrShirtsObjs: ClotheMainObjProps [] = [
     {
         id: 1,
-        img: Shirt1,
         title: "Checkered Shirt",
         grade: 4.5,
-        images: [],
+        images: [Shirt1],
         price: {
             mainPrice: 180,
             option: false,
@@ -18,10 +17,9 @@ export const arrShirtsObjs: ClotheMainObjProps [] = [
     },
     {
         id: 2,
-        img: Shirt2,
         title: "Vertical Striped Shirt",
         grade: 3.0,
-        images: [],
+        images: [Shirt2],
         price: {
             mainPrice: 232,
             option: true,
