@@ -4,7 +4,8 @@ const orderSchema = new Schema(
     {
         user: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
         items: [{
-            product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+            product: { type: Schema.Types.ObjectId, ref: "Product" },
+            catalogProductId: { type: Number, min: 1 },
             productName: { type: String, required: true },
             unitPrice: { type: Number, required: true, min: 0 },
             quantity: { type: Number, required: true, min: 1 },

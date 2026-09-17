@@ -9,16 +9,36 @@ export default function CheckoutPage() {
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState("");
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setError("");
         const formData = new FormData(event.currentTarget);
-        const requiredFields = ["fullName", "line1", "city", "postalCode", "country"];
+        const requiredFields = ["customerEmail", "fullName", "line1", "city", "postalCode", "country"];
         if (requiredFields.some((field) => !String(formData.get(field) ?? "").trim())) {
             setError("Complete all required delivery fields.");
             return;
         }
-        window.localStorage.setItem("last-order", JSON.stringify({ items, subtotal, shippingAddress: Object.fromEntries(formData) }));
+        const response = await fetch("/api/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                customerEmail: formData.get("customerEmail"),
+                items: items.map(({ productId, title, unitPrice, quantity, size, color }) => ({ productId, title, unitPrice, quantity, size, color })),
+                shippingAddress: {
+                    fullName: formData.get("fullName"),
+                    line1: formData.get("line1"),
+                    line2: formData.get("line2"),
+                    city: formData.get("city"),
+                    postalCode: formData.get("postalCode"),
+                    country: formData.get("country"),
+                },
+            }),
+        });
+        if (!response.ok) {
+            const result = await response.json() as { error?: string };
+            setError(result.error ?? "Unable to place the order.");
+            return;
+        }
         clearCart();
         setSubmitted(true);
     };
@@ -37,6 +57,7 @@ export default function CheckoutPage() {
             <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border p-6">
                     <h2 className="text-xl font-bold">Delivery details</h2>
+                    <input name="customerEmail" type="email" required placeholder="Account email" className="rounded-md border p-3" />
                     <input name="fullName" required placeholder="Full name" className="rounded-md border p-3" />
                     <input name="line1" required placeholder="Address" className="rounded-md border p-3" />
                     <input name="line2" placeholder="Apartment, suite, etc. (optional)" className="rounded-md border p-3" />
