@@ -18,9 +18,20 @@ export default function CheckoutPage() {
             setError("Complete all required delivery fields.");
             return;
         }
-        const response = await fetch("/api/orders", {
+        const authResponse = await fetch("/api/auth/token", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: formData.get("customerEmail"), password: formData.get("password") }),
+        });
+        if (!authResponse.ok) {
+            const result = await authResponse.json() as { error?: string };
+            setError(result.error ?? "Unable to sign in.");
+            return;
+        }
+        const { token } = await authResponse.json() as { token: string };
+        const response = await fetch("/api/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
             body: JSON.stringify({
                 customerEmail: formData.get("customerEmail"),
                 items: items.map(({ productId, title, unitPrice, quantity, size, color }) => ({ productId, title, unitPrice, quantity, size, color })),
@@ -58,6 +69,7 @@ export default function CheckoutPage() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border p-6">
                     <h2 className="text-xl font-bold">Delivery details</h2>
                     <input name="customerEmail" type="email" required placeholder="Account email" className="rounded-md border p-3" />
+                    <input name="password" type="password" required placeholder="Account password" className="rounded-md border p-3" />
                     <input name="fullName" required placeholder="Full name" className="rounded-md border p-3" />
                     <input name="line1" required placeholder="Address" className="rounded-md border p-3" />
                     <input name="line2" placeholder="Apartment, suite, etc. (optional)" className="rounded-md border p-3" />

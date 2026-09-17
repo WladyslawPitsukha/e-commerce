@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 npm run typecheck
 npm run lint
+npm run test:components
 npm run test:brand

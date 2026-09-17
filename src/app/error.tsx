@@ -1,6 +1,7 @@
 "use client";
 
 export default function Error({
+    error,
     reset,
 }: {
     error: Error & { digest?: string };
@@ -10,7 +11,9 @@ export default function Error({
         <main className="flex min-h-screen flex-col items-center justify-center gap-5 px-6 text-center">
             <h1 className="text-3xl font-bold text-black">Something went wrong</h1>
             <p className="max-w-md text-black/60">
-                We could not load this page. Please try again.
+                {error.message.includes("MONGODB_URI")
+                    ? "Database configuration is missing. Set MONGODB_URI and restart the application."
+                    : "We could not load this page. Please try again."}
             </p>
             <button
                 type="button"

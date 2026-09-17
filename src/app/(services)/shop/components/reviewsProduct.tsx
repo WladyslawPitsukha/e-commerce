@@ -7,6 +7,7 @@ import { CreateIcon } from "@/components/mainPage/creationIcon"
 import { IoIosArrowDown } from "react-icons/io";
 import { useEffect, useState } from "react"
 import { CommentForm } from "./commentForm"
+import { sanitizeText } from "@/utils/sanitizeText";
 
 export default function ReviewsProduct({array, productId}: {
     array: ComSectProps[];
@@ -22,7 +23,17 @@ export default function ReviewsProduct({array, productId}: {
         const stored = window.localStorage.getItem(storageKey);
         if (!stored) return;
         try {
-            setComments((current) => [...(JSON.parse(stored) as ComSectProps[]), ...current]);
+            const storedComments = JSON.parse(stored) as ComSectProps[];
+            setComments((current) => [
+                ...storedComments.map((comment) => ({
+                    ...comment,
+                    text: {
+                        username: sanitizeText(comment.text.username, 80),
+                        textCom: sanitizeText(comment.text.textCom, 2000),
+                    },
+                })),
+                ...current,
+            ]);
         } catch {
             window.localStorage.removeItem(storageKey);
         }
@@ -40,8 +51,8 @@ export default function ReviewsProduct({array, productId}: {
             id: comments.length + 1,
             grade: commnetData.grade,
             text: {
-                username: commnetData.username,
-                textCom: commnetData.textCom
+                username: sanitizeText(commnetData.username, 80),
+                textCom: sanitizeText(commnetData.textCom, 2000)
             },
             posted: new Date(commnetData.posted)
         }

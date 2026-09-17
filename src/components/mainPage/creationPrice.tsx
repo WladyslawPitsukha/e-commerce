@@ -1,3 +1,5 @@
+import React from "react";
+
 export function CreationPrice({mainPrice, option, procent}: {
     mainPrice: number;
     option: boolean;

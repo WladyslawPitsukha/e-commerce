@@ -1,6 +1,5 @@
-import { NextResponse } from "next/server";
 import { Order } from "@/models/order";
-import { User } from "@/models/user";
+import { allowRequest, apiError, apiResponse, requestId, requireUser } from "@/lib/apiSecurity";
 
 export const dynamic = "force-dynamic";
 
@@ -27,23 +26,22 @@ type CheckoutPayload = {
 };
 
 export async function POST(request: Request) {
+    const id = requestId(request);
+    if (!allowRequest(request, 10)) return apiError("Too many checkout attempts. Try again later.", 429, id);
     try {
         const payload = await request.json() as CheckoutPayload;
-        const email = payload.customerEmail?.trim().toLowerCase();
 
-        if (!email || !payload.items?.length || !payload.shippingAddress) {
-            return NextResponse.json({ error: "Customer email, cart items, and shipping address are required." }, { status: 400 });
+        if (!payload.items?.length || !payload.shippingAddress) {
+            return apiError("Cart items and shipping address are required.", 400, id);
         }
 
         if (payload.items.some((item) => !Number.isInteger(item.productId) || item.quantity < 1 || item.unitPrice < 0)) {
-            return NextResponse.json({ error: "One or more cart items are invalid." }, { status: 400 });
+            return apiError("One or more cart items are invalid.", 400, id);
         }
 
-        const { connectToDatabase } = await import("@/lib/mongodb");
-        await connectToDatabase();
-        const user = await User.findOne({ email }).select("_id").lean();
+        const user = await requireUser(request);
         if (!user) {
-            return NextResponse.json({ error: "No account was found for this email. Sign in before checkout." }, { status: 401 });
+            return apiError("Sign in before checkout.", 401, id);
         }
 
         const items = payload.items.map((item) => ({
@@ -57,8 +55,9 @@ export async function POST(request: Request) {
         const total = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
         const order = await Order.create({ user: user._id, items, shippingAddress: payload.shippingAddress, total });
 
-        return NextResponse.json({ orderId: order._id.toString(), status: order.status }, { status: 201 });
-    } catch {
-        return NextResponse.json({ error: "Unable to place the order right now." }, { status: 500 });
+        return apiResponse({ orderId: order._id.toString(), status: order.status }, 201, id);
+    } catch (error) {
+        console.error(JSON.stringify({ event: "order_create_failed", requestId: id, error: error instanceof Error ? error.message : "unknown" }));
+        return apiError("Unable to place the order right now.", 500, id);
     }
 }
