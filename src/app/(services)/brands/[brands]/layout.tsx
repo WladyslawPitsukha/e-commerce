@@ -1,12 +1,4 @@
 import type { Metadata } from "next";
-import {Roboto_Mono} from 'next/font/google';
-
-const roboto_mono = Roboto_Mono({
-  subsets:['latin'],
-  style:['normal'],
-  weight: ['400', '700'],
-  display: 'swap'
-});
 
 export type Props = {
   params: Promise<{ brands: string}>;
@@ -31,13 +23,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={roboto_mono.className} style={{
-        backgroundColor: "white",
-      }}>
-        {children}
-      </body>
-    </html>
-  );
+  return <div className="bg-white">{children}</div>;
 }

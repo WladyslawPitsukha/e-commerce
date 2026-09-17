@@ -34,11 +34,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${roboto_mono.className} bg-white`}>
+        <div className={`${roboto_mono.className} bg-white`}>
                 <NavBar />
                 {children}
-            </body>
-        </html>
+        </div>
     );
 }

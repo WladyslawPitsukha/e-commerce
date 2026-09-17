@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import {Roboto_Mono} from 'next/font/google';
-
-const roboto_mono = Roboto_Mono({
-    subsets: ["latin"],
-    style: ["normal"],
-    weight: ["400", "700"],
-    display: "swap",
-});
 
 export const metadata: Metadata = {
     title: "E-commerce / Shop",
@@ -24,10 +16,6 @@ export default function ShopLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${roboto_mono.className} bg-white`}>
-                {children}
-            </body>
-        </html>
+        <div className="bg-white">{children}</div>
     );
 }

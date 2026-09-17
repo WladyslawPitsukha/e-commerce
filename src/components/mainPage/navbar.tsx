@@ -26,7 +26,7 @@ export default function NavBar() {
                 {arrTitleLinks.map((item) => (
                     <Link 
                         href={`/${item.link}`}
-                        key={item.link}
+                        key={`${item.title}-${item.link}`}
                         aria-current={pathname === `/${item.link}` ? "page" : undefined}
                     >
                         <span className="font-normal text-base leading-[21.6px] text-black">
