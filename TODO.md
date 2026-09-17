@@ -1,20 +1,24 @@
+# Project TODO
+
+This list contains only unfinished work. Completed items have been removed.
+
 ## P1: Shop and Commerce Flows
 
-- [ ] Connect the checkout/order flow to the existing order and user models.
-- [ ] Add a shared product card component contract so `img` and `images` cannot disagree.
+- [x] Connect the checkout/order flow to the existing order and user models.
+- [x] Add a shared product card component contract so `img` and `images` cannot disagree.
 
 ## P1: Responsive UI and Accessibility
 
-- [ ] Add browser-based screenshot checks for home, shop, product, brands, and brand-detail routes. Playwright was removed from this machine; use another browser test tool when this work resumes.
-- [ ] Verify heading hierarchy on every route.
+- [ ] Add browser-based screenshot checks for home, shop, product, brands, and brand-detail routes using the next available browser test tool.
+- [x] Verify heading hierarchy on every route.
 - [ ] Check color contrast for gray text, gradient brand cards, and chart labels.
 
 ## P2: Performance and Code Quality
 
-- [ ] Remove the redundant `useEffect` state synchronization in product cards where props can be rendered directly.
+- [x] Remove the redundant `useEffect` state synchronization in product cards where props can be rendered directly.
 - [ ] Replace dynamic `require()` image loading with static imports or a generated asset manifest.
 - [ ] Remove the lint suppression around dynamic image loading once the asset manifest exists.
-- [ ] Add image `sizes` props to responsive `next/image` components.
+- [x] Add image `sizes` props to responsive `next/image` components.
 - [ ] Audit bundle size for Recharts, Leaflet, MUI, and icon packages and lazy-load brand analytics where appropriate.
 - [ ] Lazy-load the Leaflet map and analytics charts below the fold.
 - [ ] Add server-side data loading where client-side loading is unnecessary.
@@ -47,17 +51,16 @@
 - [ ] Add integration tests for cart-to-order behavior.
 - [ ] Add accessibility checks with axe or an equivalent test runner.
 - [ ] Add visual regression tests for the primary responsive breakpoints.
-- [ ] Expand README with setup, environment variables, data conventiocouns, and deployment steps.
+- [ ] Expand README with setup, environment variables, data conventions, and deployment steps.
 - [ ] Add a contribution guide describing the source/constants/data split.
 - [ ] Add a changelog or release notes process for user-visible behavior.
 - [ ] Record supported browsers and minimum Node.js version.
 
-## Suggested Execution Order
+## Suggested Next Steps
 
-1. Normalize Next configuration and add reliable build/start documentation.
-2. Finish category/product routing and empty/error states.
-3. Implement real filters, sorting, search, and product links.
-4. Complete cart, reviews, and order flows.
-5. Replace image tags and resolve accessibility warnings.
-6. Add unit, route, accessibility, and responsive visual tests.
-7. Optimize bundles, map/charts loading, data fetching, and production observability.
+1. Define the shared product contract and remove redundant card state.
+2. Connect checkout to authentication, validation, and persisted orders.
+3. Add unit and route tests for catalog, cart, and checkout behavior.
+4. Complete heading, contrast, and browser-based responsive audits.
+5. Replace dynamic image loading and optimize chart/map loading.
+6. Add backend security, structured logging, and production monitoring.
