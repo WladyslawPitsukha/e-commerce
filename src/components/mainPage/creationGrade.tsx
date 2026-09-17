@@ -31,9 +31,9 @@ export function CreationGrade({grade, className}: {
                     />
                 ))}
             </div>
-            <h5 className={`text-${className} font-satoshi text-sm font-bold leading-[22px] tracking-[0%]  m-0`}>
+            <span className={`text-${className} font-satoshi text-sm font-bold leading-[22px] tracking-[0%]  m-0`}>
                 {grade}
-            </h5>
+            </span>
         </div>
     )
 }

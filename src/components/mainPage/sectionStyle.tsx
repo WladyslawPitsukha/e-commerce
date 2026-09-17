@@ -26,9 +26,9 @@ const BlockDressStyle = ({
                     <Image 
                         src={style.img ?? "/favicon.ico"}
                         alt="clothe"
+                        fill
+                        sizes="(max-width: 640px) 100vw, 50vw"
                         className="absolute bottom-0 right-0 -z-10"
-                        layout="fill"
-                        objectFit="cover"
                     />
                 </article>
             </Link>

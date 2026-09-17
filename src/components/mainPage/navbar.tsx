@@ -18,9 +18,9 @@ export default function NavBar() {
     return(
         <nav aria-label="Primary navigation" className="flex flex-wrap justify-between gap-4 items-center py-4 px-[var(--page-gutter)] sticky top-0 left-0 bg-white/95 backdrop-blur z-50 w-full border-b border-black/5">
             <Link href="/" className="shrink-0">
-                <h2 className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
+                <span className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
                 SHOP.COM
-                </h2>
+                </span>
             </Link>
             <div className="order-3 sm:order-2 flex justify-center items-center gap-4 sm:gap-6 w-full sm:w-auto">
                 {arrTitleLinks.map((item) => (
@@ -29,9 +29,9 @@ export default function NavBar() {
                         key={item.link}
                         aria-current={pathname === `/${item.link}` ? "page" : undefined}
                     >
-                        <h3 className="font-normal text-base leading-[21.6px] text-black">
+                        <span className="font-normal text-base leading-[21.6px] text-black">
                             {item.title}
-                        </h3>
+                        </span>
                     </Link>
                 ))}                             
             </div>

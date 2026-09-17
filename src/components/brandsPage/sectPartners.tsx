@@ -11,9 +11,9 @@ export function BlockPartner({
     return(
         <article className="flex items-start p-5 rounded-3xl border-double border-gray h-auto w-auto bg-light-gray gap-5" key={id}>
             <div className="flex flex-col items-start justify-between gap-2">
-                <h1 className="font-integral text-3xl font-bold text-black">
+                <h2 className="font-integral text-3xl font-bold text-black">
                     {name}
-                </h1>
+                </h2>
                 <Link href={link}>
                     <div className="flex justify-center items-center bg-black px-3 py-1 rounded-3xl">
                         <h3 className="font-integral font-bold text-white">

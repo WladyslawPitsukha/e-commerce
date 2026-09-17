@@ -32,15 +32,16 @@ export default function HeaderSect({
                                     className="w-full aspect-[3/2] object-cover"
                                     src={item.img}
                                     alt="Product Zara"
+                                    sizes="(max-width: 1024px) 50vw, 320px"
                                 />
                             </div>
                         </Link>
                     ))}
                 </div>
                 <article className="flex flex-col items-start w-full lg:w-1/2 h-auto justify-evenly gap-5 p-2 sm:p-5 rounded-2xl">
-                    <h4 className="text-white text-3xl sm:text-5xl uppercase leading-tight">
+                    <h2 className="text-white text-3xl sm:text-5xl uppercase leading-tight">
                         Short story of {name}
-                    </h4>
+                    </h2>
                     {story.map((item) => (
                         <p className="text-white text-base sm:text-xl max-w-[1200px] indent-6 sm:indent-[50px]" key={`${name}-${item}`}>
                             {item}

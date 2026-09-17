@@ -51,6 +51,7 @@ export default function Header() {
                     className="absolute inset-0 w-full h-full object-contain object-bottom"
                     src={Models}
                     alt="Models"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <PiStarFourFill className="absolute w-16 h-16 sm:w-[104px] sm:h-[104px] top-8 sm:top-20 right-6 sm:right-20" />
                 <PiStarFourFill className="absolute w-10 h-10 sm:w-14 sm:h-14 top-[50%] left-4" />
