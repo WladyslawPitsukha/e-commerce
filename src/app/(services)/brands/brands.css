@@ -1,0 +1,96 @@
+.brand-shell {
+  --ink: #10110e;
+  --paper: #f4f1e9;
+  --acid: #d7ff49;
+  --coral: #ff6a4d;
+  --mist: #c7d5c6;
+  background:
+    linear-gradient(115deg, rgb(215 255 73 / 10%), transparent 36%),
+    radial-gradient(circle at 88% 8%, rgb(255 106 77 / 20%), transparent 25%),
+    var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+.brand-eyebrow {
+  align-items: center;
+  display: flex;
+  font-family: var(--font-noto-sans, sans-serif);
+  font-size: 0.7rem;
+  font-weight: 800;
+  gap: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.brand-eyebrow::before {
+  background: currentColor;
+  border-radius: 999px;
+  content: "";
+  height: 0.45rem;
+  width: 0.45rem;
+}
+
+.brand-display {
+  font-family: var(--font-integral, Georgia, serif);
+  letter-spacing: 0;
+}
+
+.brand-orbit {
+  animation: brand-orbit 14s linear infinite;
+}
+
+.brand-card-3d {
+  transform: perspective(1100px) rotateX(0) rotateY(0) translateY(0);
+  transform-style: preserve-3d;
+  transition: box-shadow 320ms ease, transform 320ms ease;
+}
+
+.brand-card-3d:hover {
+  box-shadow: 18px 22px 0 var(--ink);
+  transform: perspective(1100px) rotateX(3deg) rotateY(-5deg) translateY(-8px);
+}
+
+.brand-media-zoom img {
+  transition: filter 500ms ease, transform 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.brand-card-3d:hover .brand-media-zoom img {
+  filter: saturate(1.12);
+  transform: scale(1.08);
+}
+
+.brand-float-in {
+  animation: brand-float-in 650ms both;
+}
+
+.brand-metric-grid {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brand-metric-grid > * {
+  background: var(--paper);
+}
+
+@keyframes brand-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes brand-float-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+  .brand-metric-grid { grid-template-columns: 1fr; }
+  .brand-card-3d:hover { box-shadow: 8px 10px 0 var(--ink); transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-orbit,
+  .brand-float-in { animation: none; }
+  .brand-card-3d,
+  .brand-media-zoom img { transition: none; }
+}

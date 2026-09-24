@@ -1,3 +1,5 @@
+import "./brands.css";
+
 export default function BrandsLayout({
     children,
 }: {
