@@ -3,14 +3,14 @@
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { SalesDataProps } from "@/types/typesProject";
 
-export default function PieChartD({ arrGrowth }: {arrGrowth: SalesDataProps[]}) {
+export default function PieChartD({ brandName, arrGrowth }: { brandName: string; arrGrowth: SalesDataProps[] }) {
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8'];
 
     return(
-        <article className="my-10 bg-white w-full max-w-xl">
-            <h2 className='text-2xl sm:text-3xl font-bold mb-8 text-black'>
-                Sales of Zara for 2020-2025
-            </h2>
+        <article className="border border-black bg-white p-5 sm:p-7">
+            <h3 className='brand-display text-2xl text-black sm:text-3xl'>
+                {brandName} growth, 2020-2025
+            </h3>
             <div className="w-full h-[320px] sm:h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
