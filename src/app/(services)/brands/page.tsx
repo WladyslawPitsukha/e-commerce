@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { arrBrands } from "../../../constants/brands/arrBrands";
+import Link from "next/link";
+import React from "react";
+import { arrBrands } from "@/constants/brands/arrBrands";
 import Footer from "@/components/mainPage/footer";
 import NavBar from "@/components/mainPage/navbar";
-import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
 
 function getBrandSlug(name: string) {
     return name.toLowerCase().replace(/\s+/g, "-");
@@ -13,51 +13,51 @@ function getBrandSlug(name: string) {
 
 export default function BrandsListPage() {
     return (
-        <div className="min-h-screen flex flex-col items-center py-8 sm:py-12 px-[var(--page-gutter)] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 animate-fade-in">
+        <div className="brand-shell">
             <NavBar />
-            <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-center relative animate-slide-down">
-                <span className="bg-gradient-to-r from-gray-100 via-gray-400 to-gray-900 bg-clip-text text-transparent">Our Brands</span>
-                <span className="block h-1 w-24 mx-auto mt-2 rounded-full bg-gradient-to-r from-gray-400 via-gray-600 to-gray-900 animate-underline" />
-            </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-8 w-full max-w-5xl px-0 sm:px-4 mt-6">
-                {arrBrands.slice(0, 5).map((brandObj, idx) => {
-                    const { name, id } = brandObj.brand;
-                    const photo = brandObj.description.photos[0]?.img
-                    const slug = getBrandSlug(name);
-                    return (
-                        <Link
-                            key={id}
-                            href={`/brands/${slug}`}
-                            className="block bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 cursor-pointer group border border-gray-700 hover:border-gray-400 relative overflow-hidden animate-fade-in"
-                            style={{ animationDelay: `${idx * 80}ms` }}
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-700/30 via-gray-900/20 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0" />
-                            {photo ? (
-                                <div className="relative mb-4 h-48 w-full overflow-hidden rounded-md shadow-md">
-                                <Image
-                                    src={photo}
-                                    alt={name}
-                                    fill
-                                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 320px"
-                                    className="z-10 object-cover grayscale transition-transform duration-300 group-hover:scale-105 group-hover:grayscale-0"
-                                />
-                                </div>
-                            ) : (
-                                <BrandingWatermarkIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                            )}
-                            <h2 className="text-2xl font-bold mb-2 text-center text-gray-100 group-hover:text-white transition-colors duration-200 z-10 relative drop-shadow-lg">
-                                {name}
-                            </h2>
-                            <p className="text-gray-400 text-center line-clamp-2 z-10 relative">
-                                {brandObj.description.story?.[0] || "Discover more about this brand."}
-                            </p>
-                            <span className="absolute right-4 top-4 bg-gray-800/90 text-gray-200 px-2 py-1 rounded text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10 border border-gray-700 shadow">
-                                View
-                            </span>
-                        </Link>
-                    );
-                })}
-            </div>
+            <main id="main-content" className="mx-auto flex w-full max-w-[1440px] flex-col gap-10 px-[var(--page-gutter)] pb-16 pt-6 sm:gap-14 sm:pt-10">
+                <section className="relative isolate overflow-hidden border border-black bg-[#10110e] px-6 py-10 text-[#f4f1e9] shadow-[10px_10px_0_#10110e] sm:px-10 sm:py-14 lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-10">
+                    <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-[#d7ff49]/60 sm:-right-16 sm:-top-16 sm:h-96 sm:w-96" />
+                    <div className="brand-orbit absolute -right-10 top-8 h-44 w-44 rounded-full border border-dashed border-[#ff6a4d] sm:right-12 sm:top-16" />
+                    <div className="relative z-10 max-w-3xl">
+                        <p className="brand-eyebrow text-[#d7ff49]">The label index</p>
+                        <h1 className="brand-display mt-6 max-w-3xl text-5xl leading-[0.92] sm:text-7xl lg:text-8xl">Brands with a point of view.</h1>
+                        <p className="mt-6 max-w-xl text-base leading-7 text-[#f4f1e9]/75 sm:text-lg">A living edit of fashion houses, their stories, and the markets that shape their next chapter.</p>
+                    </div>
+                    <div className="relative z-10 mt-10 border-l border-[#f4f1e9]/30 pl-5 lg:mt-0">
+                        <p className="text-4xl font-bold text-[#d7ff49]">{arrBrands.length}</p>
+                        <p className="mt-1 text-sm uppercase tracking-[0.14em] text-[#f4f1e9]/65">studios in the index</p>
+                    </div>
+                </section>
+
+                <section aria-labelledby="brand-directory-title">
+                    <div className="mb-6 flex flex-wrap items-end justify-between gap-4 border-b border-black/20 pb-4">
+                        <div>
+                            <p className="brand-eyebrow text-[#ff6a4d]">Browse the houses</p>
+                            <h2 id="brand-directory-title" className="brand-display mt-3 text-3xl sm:text-5xl">The directory</h2>
+                        </div>
+                        <p className="max-w-sm text-sm leading-6 text-black/60">Open a profile to explore the narrative, business pulse, global reach, and partner network.</p>
+                    </div>
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                        {arrBrands.map((brandData, index) => {
+                            const { id, name } = brandData.brand;
+                            const photo = brandData.description.photos[0]?.img;
+                            return (
+                                <Link key={id} href={`/brands/${getBrandSlug(name)}`} aria-label={`Explore ${name}`} className="brand-card-3d brand-float-in group relative block overflow-hidden border border-black bg-[#f4f1e9] p-3 focus:outline-none focus:ring-4 focus:ring-[#ff6a4d]" style={{ animationDelay: `${index * 90}ms` }}>
+                                    <div className="brand-media-zoom relative aspect-[4/3] overflow-hidden bg-[#c7d5c6]">
+                                        {photo ? <Image src={photo} alt={`${name} collection`} fill sizes="(max-width: 767px) calc(100vw - 3rem), (max-width: 1279px) calc(50vw - 3rem), 400px" className="object-cover" /> : <div className="grid h-full place-items-center text-sm font-bold uppercase tracking-[0.16em]">No campaign image</div>}
+                                        <span className="absolute left-3 top-3 bg-[#d7ff49] px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-black">{String(index + 1).padStart(2, "0")}</span>
+                                    </div>
+                                    <div className="grid gap-4 px-2 pb-2 pt-5 sm:grid-cols-[1fr_auto] sm:items-end">
+                                        <div><h3 className="brand-display text-3xl sm:text-4xl">{name}</h3><p className="mt-2 line-clamp-2 text-sm leading-6 text-black/65">{brandData.description.story[0] ?? "Explore this house."}</p></div>
+                                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#10110e] text-xl text-[#d7ff49] transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&#8599;</span>
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </section>
+            </main>
             <Footer />
         </div>
     );
