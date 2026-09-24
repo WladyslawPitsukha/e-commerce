@@ -36,17 +36,18 @@ export default async function BrandPage({ params }: Props) {
   const { story, photos } = description;
   const { countryData, growthData, salesData } = business;
 
-  return (
-    <div className="flex flex-col justify-center bg-white">
+    return (
+    <div className="brand-shell flex flex-col justify-center">
       <HeaderSect id={id} name={name} story={story} photos={photos} />
       <main className="flex flex-col items-center justify-between">
         <SectBusiness
+          brandName={name}
           country={countryData}
           growth={growthData}
           sales={salesData}
         />
         <SectPartners partners={partners} />
-        <SectComprasion />
+        <SectComprasion brand={brand} country={countryData} />
       </main>
     </div>
   );
