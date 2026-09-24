@@ -3,8 +3,20 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { CommentForm } from "@/app/(services)/shop/components/commentForm";
+import ProductTabs from "@/app/(services)/shop/components/productTabs";
+import ShopCatalog from "@/app/(services)/shop/components/shopCatalog";
 import { CreationPrice } from "@/components/mainPage/creationPrice";
 import { CartProvider, useCart } from "@/components/cart/cartProvider";
+import NavBar from "@/components/mainPage/navbar";
+import { catalogProducts } from "@/utils/productRoutes";
+
+vi.mock("next/navigation", () => ({ usePathname: () => "/shop" }));
+vi.mock("@/components/mainPage/clothesCard", () => ({ default: ({ title }: { title: string }) => <div>{title}</div> }));
+vi.mock("@/components/mainPage/footer", () => ({ default: () => <footer>Footer</footer> }));
+vi.mock("@/app/(services)/shop/components/headerProduct", () => ({ default: () => <div>Product header</div> }));
+vi.mock("@/app/(services)/shop/components/detailsProduct", () => ({ default: () => <div>Product details content</div> }));
+vi.mock("@/app/(services)/shop/components/reviewsProduct", () => ({ default: () => <div>Review content</div> }));
+vi.mock("@/app/(services)/shop/components/faqsProduct", () => ({ default: () => <div>FAQ content</div> }));
 
 function CartProbe() {
     const { items, subtotal, addItem, updateQuantity } = useCart();
@@ -51,5 +63,40 @@ describe("CartProvider", () => {
         await user.click(screen.getByRole("button", { name: "Set three" }));
         expect(screen.getByTestId("quantity")).toHaveTextContent("3");
         expect(screen.getByTestId("subtotal")).toHaveTextContent("60");
+    });
+});
+
+describe("NavBar", () => {
+    it("submits the entered search term to the search route", async () => {
+        const user = userEvent.setup();
+        render(<NavBar />);
+        const input = screen.getByRole("textbox", { name: "Search for products" });
+        await user.type(input, "linen shirt");
+        expect(input).toHaveValue("linen shirt");
+        expect(input.closest("form")).toHaveAttribute("action", "/search");
+    });
+});
+
+describe("ShopCatalog", () => {
+    it("updates category filters and sort controls", async () => {
+        const user = userEvent.setup();
+        render(<ShopCatalog products={catalogProducts} />);
+        const category = screen.getByRole("checkbox", { name: "Casual" });
+        await user.click(category);
+        expect(category).toBeChecked();
+        await user.selectOptions(screen.getByRole("combobox", { name: "Sort products" }), "price-asc");
+        expect(screen.getByRole("combobox", { name: "Sort products" })).toHaveValue("price-asc");
+    });
+});
+
+describe("ProductTabs", () => {
+    it("switches from product details to reviews", async () => {
+        const user = userEvent.setup();
+        const product = catalogProducts[0]?.product;
+        if (!product) throw new Error("Expected catalog product");
+        render(<ProductTabs product={product} category="casualwear" />);
+        expect(screen.getByText("Product details content")).toBeInTheDocument();
+        await user.click(screen.getByRole("tab", { name: "Rating & Reviews" }));
+        expect(screen.getByText("Review content")).toBeInTheDocument();
     });
 });
