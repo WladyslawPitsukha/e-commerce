@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import React from "react";
 import ProductTabs from "../../components/productTabs";
 import { categoryAliases, getProductForRoute, getProductsForCategory, getProductSlug } from "@/utils/productRoutes";
 

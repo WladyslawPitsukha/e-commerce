@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Tab, Tabs } from "@mui/material";
-import { useState } from "react";
+import React, { useState } from "react";
 import DetailsProduct from "./detailsProduct";
 import FaqsProduct from "./faqsProduct";
 import HeaderProduct from "./headerProduct";

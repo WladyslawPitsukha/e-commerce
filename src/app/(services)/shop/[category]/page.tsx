@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import React from "react";
 import ClothesCard from "@/components/mainPage/clothesCard";
 import { categoryAliases, getProductsForCategory, getProductSlug } from "@/utils/productRoutes";
 

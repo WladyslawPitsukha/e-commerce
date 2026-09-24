@@ -1,5 +1,6 @@
 import { arrBrands } from "@/constants/brands/arrBrands";
 import { getBrandNameFromSlug } from "@/utils/getBrandNameFromSlug";
+import React from "react";
 import HeaderSect from "@/components/brandsPage/headSect";
 import SectBusiness from "@/components/brandsPage/sectBusiness";
 import SectPartners from "@/components/brandsPage/sectPartners";

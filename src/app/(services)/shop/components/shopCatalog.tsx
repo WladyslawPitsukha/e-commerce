@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import TuneIcon from "@mui/icons-material/Tune";
 import ClothesCard from "@/components/mainPage/clothesCard";
 import Footer from "@/components/mainPage/footer";
 import NavBar from "@/components/mainPage/navbar";
 import { CatalogProduct, getProductSlug } from "@/utils/productRoutes";
-
-type SortOption = "popular" | "price-asc" | "price-desc" | "rating" | "newest";
+import { CatalogSortOption, filterCatalogProducts, paginateCatalogProducts, sortCatalogProducts } from "@/utils/catalogUtils";
 
 const categoryLabels: Record<string, string> = {
     activewear: "Activewear",
@@ -109,40 +108,27 @@ export default function ShopCatalog({
     const [selectedColors, setSelectedColors] = useState<string[]>([]);
     const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [sort, setSort] = useState<SortOption>("popular");
+    const [sort, setSort] = useState<CatalogSortOption>("popular");
     const [page, setPage] = useState(1);
     const [filtersOpen, setFiltersOpen] = useState(false);
     const filterHeadingRef = useRef<HTMLHeadingElement>(null);
     const pageSize = 9;
 
-    const filteredProducts = useMemo(() => {
-        const normalizedQuery = query.trim().toLowerCase();
-        const result = products.filter(({ category, product }) => {
-            const matchesQuery = !normalizedQuery || `${product.title} ${product.description}`.toLowerCase().includes(normalizedQuery);
-            const matchesPrice = product.price.mainPrice >= minPrice && product.price.mainPrice <= maxPrice;
-            const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(category);
-            const matchesColor = selectedColors.length === 0 || product.details.colors.some((color) => selectedColors.includes(color.title));
-            const matchesSize = selectedSizes.length === 0 || product.details.sizes.some((size) => selectedSizes.includes(size.title));
-            return matchesQuery && matchesPrice && matchesCategory && matchesColor && matchesSize;
-        });
-
-        return [...result].sort((left, right) => {
-            if (sort === "price-asc") return left.product.price.mainPrice - right.product.price.mainPrice;
-            if (sort === "price-desc") return right.product.price.mainPrice - left.product.price.mainPrice;
-            if (sort === "rating") return right.product.grade - left.product.grade;
-            if (sort === "newest") return right.product.id - left.product.id;
-            return right.product.grade - left.product.grade;
-        });
-    }, [maxPrice, minPrice, products, query, selectedCategories, selectedColors, selectedSizes, sort]);
+    const filteredProducts = useMemo(() => sortCatalogProducts(filterCatalogProducts(products, {
+        query,
+        minPrice,
+        maxPrice,
+        categories: selectedCategories,
+        colors: selectedColors,
+        sizes: selectedSizes,
+    }), sort), [maxPrice, minPrice, products, query, selectedCategories, selectedColors, selectedSizes, sort]);
 
     useEffect(() => setPage(1), [maxPrice, minPrice, query, selectedCategories, selectedColors, selectedSizes, sort]);
     useEffect(() => {
         if (filtersOpen) filterHeadingRef.current?.focus();
     }, [filtersOpen]);
 
-    const totalPages = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
-    const currentPage = Math.min(page, totalPages);
-    const visibleProducts = filteredProducts.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    const { currentPage, totalPages, products: visibleProducts } = paginateCatalogProducts(filteredProducts, page, pageSize);
     const filterProps = {
         products,
         minPrice,
@@ -175,7 +161,7 @@ export default function ShopCatalog({
                     <section className="min-w-0 flex-1">
                         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <label className="flex-1"><span className="sr-only">Search products</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search products..." className="w-full rounded-full border bg-[#F0F0F0] px-5 py-3 outline-none focus:ring-2 focus:ring-black" /></label>
-                            <select value={sort} onChange={(event) => setSort(event.target.value as SortOption)} className="rounded-full border px-4 py-3 text-sm" aria-label="Sort products">
+                            <select value={sort} onChange={(event) => setSort(event.target.value as CatalogSortOption)} className="rounded-full border px-4 py-3 text-sm" aria-label="Sort products">
                                 <option value="popular">Most Popular</option><option value="price-asc">Price: Low to high</option><option value="price-desc">Price: High to low</option><option value="rating">Top rated</option><option value="newest">Newest</option>
                             </select>
                         </div>

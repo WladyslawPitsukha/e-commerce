@@ -46,8 +46,9 @@ export const CommentForm = ({ onSubmit, isSubmitting = false }: CommentFormProps
                 required
             />
             <div className="flex items-center gap-2">
-                <label className="text-black">Rating:</label>
+                <label htmlFor="review-rating" className="text-black">Rating:</label>
                 <select
+                    id="review-rating"
                     value={comment.grade}
                     onChange={(e) => setComment({ ...comment, grade: Number(e.target.value) })}
                     className="p-2 border rounded-md text-black"
@@ -58,8 +59,9 @@ export const CommentForm = ({ onSubmit, isSubmitting = false }: CommentFormProps
                 </select>
             </div>
             <div className="flex items-center gap-2">
-                <label className="text-black">Posted:</label>
+                <label htmlFor="review-posted" className="text-black">Posted:</label>
                 <input
+                    id="review-posted"
                     type="date"
                     value={comment.posted}
                     onChange={(e) => setComment({ ...comment, posted: e.target.value })}
