@@ -6,6 +6,13 @@
   --background: #ffffff;
   --foreground: #171717;
   --page-gutter: clamp(1rem, 4vw, 6.25rem);
+  --surface: #ffffff;
+  --surface-muted: #f4f3ef;
+  --surface-strong: #171717;
+  --line: #d7d5ce;
+  --text-muted: #595959;
+  --accent: #d7ff49;
+  --accent-warm: #ff6a4d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,6 +37,19 @@ button,
 a,
 input {
   -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  border-color: var(--line);
 }
 
 :focus-visible {
@@ -67,6 +87,56 @@ input {
 
 .page-gutter {
   padding-inline: var(--page-gutter);
+}
+
+@layer components {
+  .ui-panel {
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    box-shadow: 0 1px 0 rgb(23 23 23 / 4%);
+  }
+
+  .ui-button {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid var(--surface-strong);
+    border-radius: 999px;
+    background: var(--surface-strong);
+    padding: 0.625rem 1.125rem;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+  }
+
+  .ui-button:hover { transform: translateY(-2px); background: #343434; }
+  .ui-button:disabled { cursor: not-allowed; opacity: 0.55; transform: none; }
+
+  .ui-button-secondary {
+    background: transparent;
+    color: var(--surface-strong);
+  }
+
+  .ui-button-secondary:hover { background: var(--surface-strong); color: #ffffff; }
+
+  .ui-field {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 0.625rem;
+    background: #ffffff;
+    color: var(--foreground);
+    padding: 0.75rem 0.875rem;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .ui-field:focus { border-color: var(--surface-strong); box-shadow: 0 0 0 3px rgb(23 23 23 / 12%); outline: none; }
+  .ui-muted { color: var(--text-muted); }
+  .ui-kicker { color: var(--text-muted); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 }
 
 /*

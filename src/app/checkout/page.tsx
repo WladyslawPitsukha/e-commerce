@@ -55,30 +55,30 @@ export default function CheckoutPage() {
     };
 
     if (submitted) {
-        return <main className="page-gutter flex min-h-screen flex-col items-center justify-center gap-5 text-center"><h1 className="text-3xl font-bold">Order received</h1><p className="text-black/60">Your order details were saved locally. Sign in will be required before production checkout is enabled.</p><Link href="/shop" className="rounded-full bg-black px-6 py-3 font-medium text-white">Continue shopping</Link></main>;
+        return <main className="page-gutter flex min-h-screen flex-col items-center justify-center gap-5 text-center"><p className="ui-kicker">Order complete</p><h1 className="text-3xl font-bold">Order received</h1><p className="ui-muted max-w-md">Your order details were saved locally. Sign in will be required before production checkout is enabled.</p><Link href="/shop" className="ui-button">Continue shopping <span aria-hidden="true">&#8594;</span></Link></main>;
     }
 
     if (items.length === 0) {
-        return <main className="page-gutter flex min-h-screen flex-col items-center justify-center gap-5 text-center"><h1 className="text-3xl font-bold">Nothing to check out</h1><Link href="/cart" className="rounded-full bg-black px-6 py-3 font-medium text-white">Return to cart</Link></main>;
+        return <main className="page-gutter flex min-h-screen flex-col items-center justify-center gap-5 text-center"><p className="ui-kicker">Cart status</p><h1 className="text-3xl font-bold">Nothing to check out</h1><Link href="/cart" className="ui-button">Return to cart <span aria-hidden="true">&#8594;</span></Link></main>;
     }
 
     return (
-        <main className="page-gutter mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 py-10">
-            <h1 className="text-3xl font-bold">Checkout</h1>
+        <main className="page-gutter mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 py-10 sm:py-14">
+            <div className="border-b border-black/10 pb-5"><p className="ui-kicker">Secure checkout</p><h1 className="mt-2 text-3xl font-bold sm:text-4xl">Checkout</h1></div>
             <div className="grid gap-8 lg:grid-cols-[1fr_20rem]">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 rounded-2xl border p-6">
+                <form onSubmit={handleSubmit} className="ui-panel flex flex-col gap-4 p-6 sm:p-7">
                     <h2 className="text-xl font-bold">Delivery details</h2>
-                    <input name="customerEmail" type="email" required placeholder="Account email" className="rounded-md border p-3" />
-                    <input name="password" type="password" required placeholder="Account password" className="rounded-md border p-3" />
-                    <input name="fullName" required placeholder="Full name" className="rounded-md border p-3" />
-                    <input name="line1" required placeholder="Address" className="rounded-md border p-3" />
-                    <input name="line2" placeholder="Apartment, suite, etc. (optional)" className="rounded-md border p-3" />
-                    <div className="grid gap-4 sm:grid-cols-2"><input name="city" required placeholder="City" className="rounded-md border p-3" /><input name="postalCode" required placeholder="Postal code" className="rounded-md border p-3" /></div>
-                    <input name="country" required placeholder="Country" className="rounded-md border p-3" />
+                    <input name="customerEmail" type="email" required placeholder="Account email" aria-label="Account email" className="ui-field" />
+                    <input name="password" type="password" required placeholder="Account password" aria-label="Account password" className="ui-field" />
+                    <input name="fullName" required placeholder="Full name" aria-label="Full name" className="ui-field" />
+                    <input name="line1" required placeholder="Address" aria-label="Address" className="ui-field" />
+                    <input name="line2" placeholder="Apartment, suite, etc. (optional)" aria-label="Apartment, suite, or other address details" className="ui-field" />
+                    <div className="grid gap-4 sm:grid-cols-2"><input name="city" required placeholder="City" aria-label="City" className="ui-field" /><input name="postalCode" required placeholder="Postal code" aria-label="Postal code" className="ui-field" /></div>
+                    <input name="country" required placeholder="Country" aria-label="Country" className="ui-field" />
                     {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-                    <button type="submit" className="rounded-full bg-black px-6 py-3 font-medium text-white">Place order</button>
+                    <button type="submit" className="ui-button">Place order <span aria-hidden="true">&#8594;</span></button>
                 </form>
-                <aside className="flex h-fit flex-col gap-4 rounded-2xl border p-6"><h2 className="text-xl font-bold">Total</h2><p className="flex justify-between text-black/60"><span>Items</span><span>{items.reduce((total, item) => total + item.quantity, 0)}</span></p><p className="flex justify-between font-bold"><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></p><p className="text-sm text-black/60">Taxes and shipping are calculated when production checkout is connected.</p></aside>
+                <aside className="ui-panel flex h-fit flex-col gap-4 p-6"><h2 className="text-xl font-bold">Total</h2><p className="flex justify-between text-[var(--text-muted)]"><span>Items</span><span>{items.reduce((total, item) => total + item.quantity, 0)}</span></p><p className="flex justify-between font-bold"><span>Subtotal</span><span>${subtotal.toFixed(2)}</span></p><p className="text-sm text-[var(--text-muted)]">Taxes and shipping are calculated when production checkout is connected.</p></aside>
             </div>
         </main>
     );

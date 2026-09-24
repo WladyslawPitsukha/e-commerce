@@ -16,20 +16,20 @@ export default function NavBar() {
     const pathname = usePathname();
     
     return(
-        <nav aria-label="Primary navigation" className="flex flex-wrap justify-between gap-4 items-center py-4 px-[var(--page-gutter)] sticky top-0 left-0 bg-white/95 backdrop-blur z-50 w-full border-b border-black/5">
+        <nav aria-label="Primary navigation" className="sticky left-0 top-0 z-50 flex w-full flex-wrap items-center justify-between gap-4 border-b border-black/10 bg-white/90 px-[var(--page-gutter)] py-3 backdrop-blur-xl">
             <Link href="/" className="shrink-0">
-                <span className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
+                <span className="text-2xl font-bold leading-tight text-black sm:text-[32px]">
                 SHOP.COM
                 </span>
             </Link>
-            <div className="order-3 sm:order-2 flex justify-center items-center gap-4 sm:gap-6 w-full sm:w-auto">
+            <div className="order-3 flex w-full items-center justify-start gap-4 overflow-x-auto pb-1 sm:order-2 sm:w-auto sm:justify-center sm:gap-6 sm:pb-0">
                 {arrTitleLinks.map((item) => (
                     <Link 
                         href={`/${item.link}`}
                         key={`${item.title}-${item.link}`}
                         aria-current={pathname === `/${item.link}` ? "page" : undefined}
                     >
-                        <span className="font-normal text-base leading-[21.6px] text-black">
+                        <span className={`whitespace-nowrap text-sm font-semibold transition-colors hover:text-[var(--text-muted)] ${pathname === `/${item.link}` ? "text-black" : "text-black/70"}`}>
                             {item.title}
                         </span>
                     </Link>
@@ -37,26 +37,26 @@ export default function NavBar() {
             </div>
             <form
                 action="/search"
-                className="relative flex items-center order-2 sm:order-3 flex-1 min-w-[min(100%,14rem)] sm:max-w-[36rem]"
+                className="relative order-2 flex min-w-[min(100%,14rem)] flex-1 items-center sm:order-3 sm:max-w-[28rem]"
                 role="search"
                 aria-label="Site search"
             >
                 <IoSearch
-                    className="absolute left-3 w-5 h-5 text-[#00000066]"
+                    className="absolute left-3 h-5 w-5 text-[var(--text-muted)]"
                     aria-hidden="true"
                 />
                 <input
                     type="text"
                     name="q"
                     value={searchTerm}
-                    className="py-2 pl-10 pr-4 w-full h-11 border rounded-full outline-none bg-[#F0F0F0]"
+                    className="h-11 w-full rounded-full border border-black/10 bg-[#f4f3ef] py-2 pl-10 pr-4 text-sm outline-none transition-shadow focus:shadow-[0_0_0_3px_rgb(23_23_23_/_12%)]"
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search for products..."
                     aria-label="Search for products"
                 />
                 <button type="submit" className="sr-only">Search</button>
             </form>
-            <div className="flex items-center justify-between gap-3 order-1 sm:order-4">
+            <div className="order-1 flex items-center justify-between gap-3 sm:order-4">
                 {arrIconNavlinks.map((item) => (
                     item.icon ? <Link
                         href={`/${item.link}`}
@@ -66,7 +66,7 @@ export default function NavBar() {
                     >
                         <CreateIcon
                             icon={item.icon}
-                            className="w-6 h-6 text-black cursor-pointer transition-transform duration-200 hover:scale-110"
+                            className="h-6 w-6 text-black transition-transform duration-200 hover:scale-110"
                         />
                     </Link> : null
                 ))}

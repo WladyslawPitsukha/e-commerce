@@ -29,20 +29,20 @@ export const CommentForm = ({ onSubmit, isSubmitting = false }: CommentFormProps
     }
 
     return(
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-2xl p-6 bg-white rounded-[20px] border border-gray-500">
+        <form onSubmit={handleSubmit} className="ui-panel flex w-full max-w-2xl flex-col gap-4 p-6 sm:p-7">
             <input
                 type="text"
                 value={comment.username}
                 onChange={(e) => setComment({ ...comment, username: e.target.value })}
                 placeholder="Your name"
-                className="p-2 border rounded-md text-black"
+                className="ui-field"
                 required
             />
             <textarea
                 value={comment.textCom}
                 onChange={(e) => setComment({ ...comment, textCom: e.target.value })}
                 placeholder="Your review"
-                className="p-2 border rounded-md h-32 text-black"
+                className="ui-field h-32 resize-y"
                 required
             />
             <div className="flex items-center gap-2">
@@ -51,7 +51,7 @@ export const CommentForm = ({ onSubmit, isSubmitting = false }: CommentFormProps
                     id="review-rating"
                     value={comment.grade}
                     onChange={(e) => setComment({ ...comment, grade: Number(e.target.value) })}
-                    className="p-2 border rounded-md text-black"
+                    className="ui-field w-auto"
                 >
                     {[1, 2, 3, 4, 5].map((num) => (
                         <option className="text-black" key={num} value={num}>{num}</option>
@@ -65,13 +65,13 @@ export const CommentForm = ({ onSubmit, isSubmitting = false }: CommentFormProps
                     type="date"
                     value={comment.posted}
                     onChange={(e) => setComment({ ...comment, posted: e.target.value })}
-                    className="p-2 border rounded-md text-black"
+                    className="ui-field w-auto"
                 />
             </div>
             <button 
                 type="submit"
                 disabled={isSubmitting}
-                className="px-7 py-3 bg-black text-white rounded-[62px] font-satoshi font-medium text-base"
+                className="ui-button w-full sm:w-fit"
             >
                 {isSubmitting ? "Submitting..." : "Submit Review"}
             </button>

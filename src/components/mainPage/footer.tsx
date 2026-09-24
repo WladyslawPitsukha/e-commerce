@@ -6,21 +6,21 @@ import Image from "next/image";
 
 export default function Footer() {
     return(
-        <footer aria-label="Footer" className="flex flex-col gap-6 pt-16 sm:pt-32 pb-12 sm:pb-20 px-[var(--page-gutter)] mt-20 bg-[#F0F0F0] w-full">
-            <section className="grid grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
-                <aside className="col-span-2 lg:col-span-1 flex flex-col items-start gap-[35px]">
+        <footer aria-label="Footer" className="mt-20 flex w-full flex-col gap-8 bg-[#f4f3ef] px-[var(--page-gutter)] pb-12 pt-16 sm:pb-16 sm:pt-24">
+            <section className="grid grid-cols-2 gap-10 lg:grid-cols-5 lg:gap-8">
+                <aside className="col-span-2 flex flex-col items-start gap-8 lg:col-span-1">
                     <div className="flex flex-col items-start gap-6">
                         <h2 className="text-2xl sm:text-[32px] font-bold leading-tight text-left text-black">
                             SHOP.COM
                         </h2>
-                        <p className="font-satoshi text-sm font-normal leading-[22px] text-left text-[#00000099] w-60">
+                        <p className="w-60 text-sm leading-6 text-[var(--text-muted)]">
                             We have clothes that suits your style and which you’re proud to wear. From women to men.
                         </p>
                     </div>
                     <div className="flex items-start justify-between gap-3">
                         {arrIconLinks.map((obj) => (
                             <div 
-                                className="border border-[#F0F0F0] bg-white p-[7px] rounded-full transition-transform duration-200 ease-in-out hover:scale-110 hover:shadow-md"
+                                className="rounded-full border border-black/10 bg-white p-2 transition-transform duration-200 ease-in-out hover:-translate-y-1 hover:shadow-md"
                                 key={obj.title || obj.link}
                             >
                                 <a href={obj.link} className="underline-offset-0 cursor-pointer" aria-label={obj.title} target="_blank" rel="noreferrer noopener">
@@ -41,13 +41,13 @@ export default function Footer() {
                         {obj.array.map((linkObj) => linkObj.link ? (
                             <a key={linkObj.textLink} href={linkObj.link} className="underline-offset-0 cursor-pointer" aria-label={linkObj.textLink}>
                                 <span
-                                    className="font-satoshi text-base font-normal text-left text-[#00000099] hover:text-black transition-colors duration-150"
+                                    className="text-base text-[var(--text-muted)] transition-colors duration-150 hover:text-black"
                                 >
                                     {linkObj.textLink}
                                 </span>
                             </a>
                         ) : (
-                            <span key={linkObj.textLink} aria-disabled="true" className="cursor-not-allowed text-base text-[#00000066]">
+                            <span key={linkObj.textLink} aria-disabled="true" className="cursor-not-allowed text-base text-[#767676]">
                                 {linkObj.textLink}
                             </span>
                         ))}
@@ -56,7 +56,7 @@ export default function Footer() {
             </section>
             <hr className="border border-[rgba(0, 0, 0, 0.1)]" />
             <section className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-                <h2 className="font-satoshi text-sm font-normal leading-[18.9px] text-left text-[#00000099]">
+                <h2 className="text-sm leading-[18.9px] text-[var(--text-muted)]">
                     Shop.com © 2000-2025, All Rights Reserved
                 </h2>
                 <div className="flex flex-wrap items-center gap-3">
