@@ -20,21 +20,78 @@ SHOP.COM is a responsive fashion playground built for browsing by instinct. Star
 
 This is a growing commerce foundation, not a frozen catalog. Product data is currently local and easy to iterate on; the cart, checkout, review, and brand experiences are shaped to connect to authenticated database-backed services as the project evolves.
 
-## Development
+## Setup
 
-Install dependencies with `npm install`, then run `npm run dev`.
+### Prerequisites
 
-Useful checks:
+- Node.js 20 or later
+- npm 10 or later
+- MongoDB, only for database-backed API and checkout flows
 
-- `npm run typecheck` checks TypeScript without emitting files.
-- `npm run lint` runs the Next.js lint checks.
-- `npm run check` runs typecheck and lint together.
-- `npm run build` creates the production build.
-- `npm run build:clean` removes `.next` before rebuilding if generated chunks are inconsistent.
-- `npm run start` starts the production build.
+Install dependencies and start the local storefront:
 
-Run only one Next.js process against this checkout at a time. Do not run `next dev`,
-`next build`, and `next start` concurrently because they share the `.next` directory.
+```bash
+npm install
+Copy-Item .env.example .env.local
+npm run dev
+```
 
-Copy `.env.example` to `.env.local` and provide the required environment variables before
-using database-backed features.
+The application is served at `http://localhost:3000`. Run only one Next.js process against this checkout at a time because `next dev`, `next build`, and `next start` share `.next`.
+
+## Environment Variables
+
+Create `.env.local` from `.env.example`; never commit a populated local file.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `MONGODB_URI` | Yes for database routes | MongoDB connection string used by product, cart, order, review, and user APIs. |
+| `AUTH_SECRET` | Yes for authentication | Long random value used to sign access tokens. Use a different secret in every environment. |
+
+The catalog and public page routes can be explored without MongoDB. Database-backed routes show a configuration error until `MONGODB_URI` is set.
+
+## Data Conventions
+
+- Catalog fixtures live in `src/constants/category'/`; category keys use the `*wear` form such as `casualwear` and `officewear`.
+- URL aliases and catalog lookup live in `src/utils/productRoutes.ts`. Use `getProductSlug` when creating product URLs instead of hand-building slugs.
+- `src/data/` contains page-specific static content, including brand data. Keep display data separate from React components.
+- `src/models/` contains Mongoose schemas for persisted data. API routes in `src/app/api/` validate input before using those models.
+- Use the shared `ProductCardProps` contract for product cards so `img` and `images` stay coherent.
+
+## Development And Testing
+
+| Command | Purpose |
+| --- | --- |
+| `npm run typecheck` | Check TypeScript without emitting files. |
+| `npm run lint` | Run Next.js lint checks. |
+| `npm run check` | Run typecheck and lint together. |
+| `npm run test:components` | Run Vitest unit, component, route, API-flow, and accessibility tests. |
+| `npm run test:brand` | Run brand route and responsive implementation checks. |
+| `npm run test:visual` | Compare desktop and mobile storefront screenshots with committed Playwright baselines. |
+| `npm run test:visual:update` | Intentionally regenerate visual baselines after reviewing a UI change. |
+| `npm run build` | Create the production build. |
+| `npm run start` | Serve the production build. |
+
+Install the browser once before running visual tests:
+
+```bash
+npx playwright install chromium
+```
+
+Visual baselines cover home, shop, category, product, brands, and brand-detail pages at 1440px and 390px viewport widths. Review generated diffs before accepting updated snapshots.
+
+## Deployment
+
+Build and run the production artifact locally before deployment:
+
+```bash
+npm run check
+npm run test:components
+npm run test:brand
+npm run test:visual
+npm run build
+npm run start
+```
+
+Configure `MONGODB_URI` and `AUTH_SECRET` in the target platform's secret store. Do not expose either value through a `NEXT_PUBLIC_` variable. Configure the application health check against a public route such as `/`, and use the platform's TLS termination and log collection facilities.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the source/constants/data ownership model and contribution workflow.
