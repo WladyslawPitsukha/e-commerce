@@ -1,119 +1,44 @@
-import { BasicPropsBrand as BasicInfoProps, CountryDataProps } from "@/types/typesProject";
-
-import { arrBrands } from "@/constants/brands/arrBrands";
-
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Link from "next/link";
-import { arrCountryZara } from "@/constants/brands/dataOfBrands/zara/arrCountryZara";
+import React from "react";
+import { BasicPropsBrand, CountryDataProps } from "@/types/typesProject";
 
-export function BlockArtComprasion({
-    id, 
-    name,
-    links,
-}: BasicInfoProps) {
-    if (!id || !name || !links) return null;
+type MetricKey = "revenue" | "marketShare" | "storeCount";
 
-    return(
-        <article 
-            className="flex flex-col items-center justify-between" 
-            key={id}
-        >
-            <h2 className="text-black">
-                {name}
-            </h2>
-            <div>
-                {[{
-                    link: links.mainLink,
-                    title: "Landing",
-                }, {
-                    link: links.webpageLink,
-                    title: "The website",
-                }].map((obj) => (
-                    <Link href={obj.link} key={obj.title}>
-                        <span className="text-black">
-                            {obj.title}
-                        </span>
-                    </Link>
-                ))}
-            </div>
-        </article>
-    )
+const metricLabels: Record<MetricKey, string> = {
+    revenue: "Average revenue",
+    marketShare: "Market share",
+    storeCount: "Store footprint",
+};
+
+function average(countryData: CountryDataProps[], metric: MetricKey) {
+    if (!countryData.length) return 0;
+    return countryData.reduce((total, country) => total + country.financeData[metric], 0) / countryData.length;
 }
 
-export default function SectComprasion() {
-    const averageValue = (propertyData: keyof CountryDataProps['financeData']):number => {
-        const sum = arrCountryZara.reduce((acc, country) => {
-            return acc + country.financeData[propertyData];
-        }, 0)
+function metricValue(metric: MetricKey, value: number) {
+    if (metric === "revenue") return `$${Math.round(value)}m`;
+    if (metric === "marketShare") return `${Math.round(value)}%`;
+    return Math.round(value).toLocaleString();
+}
 
-        return Number(Math.floor((sum / arrCountryZara.length)).toFixed(2));
-    }
+export default function SectComprasion({ brand, country }: { brand: BasicPropsBrand; country: CountryDataProps[] }) {
+    const metrics = (Object.keys(metricLabels) as MetricKey[]).map((metric) => ({
+        label: metricLabels[metric],
+        value: metricValue(metric, average(country, metric)),
+    }));
 
-    const tableHeadProps: string[] = [
-        "Revenue Brand",
-        "Revenue Competitor",
-        "Market Share Brand",
-        "Market Share Competitor",
-        "Store count Brand",
-        "Store count Competitor",
-    ];
-
-    const tableBodyProps: (number | string)[] = [
-        `$ ${averageValue('revenue')} mln`,
-        0,
-        averageValue('marketShare'),
-        0,
-        averageValue('storeCount'),
-        0,
-    ];
-
-    const arrBlockBrands = arrBrands.map(obj => obj.brand).filter(brand => brand !== undefined)
-
-    if (!arrBlockBrands[0]) {
-        return null;
-    }
-
-    return(
-        <section className="flex flex-col lg:flex-row items-start justify-evenly w-full h-auto my-10 px-[var(--page-gutter)] gap-6 bg-white overflow-x-auto">
-            <BlockArtComprasion  
-                id={arrBlockBrands[0].id}
-                name={arrBlockBrands[0].name}
-                links={arrBlockBrands[0].links}
-            />
-            <TableContainer className="max-w-full overflow-x-auto">
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            {tableHeadProps.map((title, index) => (
-                                <TableCell key={`${title}-${index}`} component="th" scope="col">
-                                    <span className="w-24">{title}</span>
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        <TableRow>
-                            {tableBodyProps.map((title, index) => (
-                                <TableCell key={`${title}-${index}`}>
-                                    <span className="w-24">{title}</span>
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <Grid 
-                style={{background: ''}} 
-                container 
-                rowSpacing={2} 
-                columnSpacing={2}
-            >
-                {arrBlockBrands.slice(1, 5).map((obj) => (
-                    <Grid size={5} key={obj?.id}>
-                        <BlockArtComprasion {...obj} />
-                    </Grid>
-                ))}
-            </Grid>
+    return (
+        <section className="w-full bg-[#c7d5c6] px-[var(--page-gutter)] py-14 sm:py-20">
+            <div className="mx-auto max-w-[1440px]">
+                <div className="grid gap-7 border-b border-black/25 pb-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                    <div><p className="brand-eyebrow text-[#10110e]">Market snapshot</p><h2 className="brand-display mt-3 text-4xl sm:text-6xl">The {brand.name} signal.</h2></div>
+                    <p className="max-w-2xl text-sm leading-6 text-black/65 sm:text-base">A country-level average across the current footprint. This view is designed to compare the shape of a brand&apos;s business at a glance, without forcing dense tables onto smaller screens.</p>
+                </div>
+                <div className="brand-metric-grid mt-7 border border-black">
+                    {metrics.map((metric, index) => <article key={metric.label} className="min-h-44 p-6 sm:p-8"><p className="text-xs font-bold uppercase tracking-[0.14em] text-black/55">0{index + 1} / {metric.label}</p><p className="brand-display mt-7 text-5xl sm:text-6xl">{metric.value}</p></article>)}
+                </div>
+                {brand.links ? <div className="mt-7 flex flex-wrap gap-3"><Link href={brand.links.mainLink} className="border border-black bg-[#10110e] px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-[#d7ff49]">Explore {brand.name}</Link><Link href={brand.links.webpageLink} className="border border-black px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-black">Official website &#8599;</Link></div> : null}
+            </div>
         </section>
-    )
+    );
 }
