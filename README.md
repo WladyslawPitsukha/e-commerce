@@ -38,6 +38,15 @@ npm run dev
 
 The application is served at `http://localhost:3000`. Run only one Next.js process against this checkout at a time because `next dev`, `next build`, and `next start` share `.next`.
 
+## Platform Support
+
+- Node.js: 20.0.0 or later, enforced through `package.json`.
+- npm: 10.0.0 or later.
+- Browsers: the current and previous major releases of Chrome, Edge, Firefox, and Safari.
+- Mobile browsers: the current and previous major releases of iOS Safari and Chrome for Android.
+
+The visual regression suite runs in Chromium at 1440px and 390px viewports. It is a layout guard, not a claim that only Chromium is supported.
+
 ## Environment Variables
 
 Create `.env.local` from `.env.example`; never commit a populated local file.
@@ -93,5 +102,9 @@ npm run start
 ```
 
 Configure `MONGODB_URI` and `AUTH_SECRET` in the target platform's secret store. Do not expose either value through a `NEXT_PUBLIC_` variable. Configure the application health check against a public route such as `/`, and use the platform's TLS termination and log collection facilities.
+
+## Release Notes
+
+User-visible changes are recorded in [CHANGELOG.md](CHANGELOG.md). Add entries under `Unreleased` in the same pull request that changes the experience, then move them into a dated release section when publishing.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the source/constants/data ownership model and contribution workflow.

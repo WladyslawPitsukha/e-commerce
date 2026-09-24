@@ -36,4 +36,5 @@ Prefer importing data through the existing category, brand, and route helpers. A
 - Preserve the shared product-card contract; do not create duplicate image fields or incompatible product shapes.
 - Use accessible labels, semantic headings, and keyboard-operable controls for UI changes.
 - Explain user-visible behavior, data changes, environment-variable changes, and visual baseline updates in the pull request description.
+- Add user-visible additions, changes, and fixes to the `Unreleased` section of [CHANGELOG.md](CHANGELOG.md). Follow its release process when publishing.
 - Do not include generated `.next/`, browser traces, local environment files, or credentials in commits.
